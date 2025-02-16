@@ -17,6 +17,8 @@ html {
 body {
     font-family: "Fira Code", serif;
     background-color: var(--background-color);
+    max-width: 1400px;
+    margin: 0px auto;
 }
 
 a {
@@ -106,6 +108,71 @@ nav .trailing a:last-child {
    }
 }
 
+/* Section 2: Experience */
+
+.experience-section {
+    padding: 0px 44px;
+    margin-bottom: 88px;
+}
+
+.experience-section  h2 {
+    font-size: 32px;
+}
+/* Section 3: Contact */
+
+.contact-section {
+    padding: 0px 44px;
+    margin-bottom: 88px;
+}
+
+.contact-section h2 {
+    font-size: 32px;
+}
+
+.contact-section .group {
+    display: flex;
+    gap: 48px;
+}
+
+.contact-section .group .text {
+    flex: 4;
+    margin-top: 20px;
+}
+
+.contact-section .group form {
+    flex: 4;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-section .group form input,
+.contact-section .group form textarea {
+    font-family: Fira Code, sans-serif;
+    border: 1px solid var(--link-color);
+    background-color: transparent;
+    padding: 10px;
+    margin-bottom: 15px;
+    outline: none;
+    resize: none;
+    border-radius: 4px;
+}
+
+.contact-section .group form button {
+    font-family: Fira Code;
+    font-size: 16px;
+    color: white;
+    background-color: var(--link-color);
+    border: none;
+    border-radius: 4px;
+    height: 32px;
+    cursor: pointer;
+    transition: .1s;
+}
+
+.contact-section .group form button:hover {
+    filter: brightness(.9);
+}
+
 @media (max-width: 740px) {
     /* Section 1: Hero */ 
     .hero-section {
@@ -118,6 +185,11 @@ nav .trailing a:last-child {
 
     .hero-section .headshot img {
         width: 300px;
+    }
+
+    /* Section 2: Contact */
+    .contact-section .group {
+        flex-direction: column;
     }
  }
 
@@ -143,5 +215,15 @@ nav .trailing a:last-child {
      /* Section 1: Hero */
      .hero-section {
         padding: 0 20px;
+     }
+
+     /* Section 2: Experience */
+     .experience-section {
+        padding: 0px 20px;
+     }
+
+     /* Section 3: Contact */
+     .contact-section {
+        padding: 0px 20px;
      }
 }

@@ -70,16 +70,37 @@
 		 </section>
 
 		<!-- Section 2: Experience -->
-		<section id="experience">
+		<section id="experience" class="experience-section">
 			<h2>Experience</h2>
 			<div class="text">
 				<i>To be updated…</i>
 			</div>
-
 		</section>
 
 		<!-- Section 3: Contact -->
-		<section id="contact"></section>
+		<section id="contact" class="contact-section">
+			<h2>Contact</h2>
+			<div class="group">
+				<div class="text">
+					<p>Feel free to reach out—whether you have a question or just want to say hi!</p>
+				</div>
+				<form action="https://formsubmit.co/andrius@telbin.dev" method="post">
+					<label for="name">Name</label>
+					<input type="text" id="name">
+
+					<label for="email">Email</label>
+					<input type="text" id="email">
+
+					<label for="message">Message</label>
+					<textarea id="message" cols="30" rows="10"></textarea>
+
+					<input type="hidden" name="_next" value="https://telbin.dev/thanks.html">
+					<input type="hidden" name="_subject" value="Message from contact form">
+
+					<button type="submit">Send Message</button>
+				</form>
+			</div>
+		</section>
 	</main>
 </body>
 </html>
