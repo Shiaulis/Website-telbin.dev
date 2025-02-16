@@ -1,7 +1,17 @@
+/* Default (light) mode */
 :root {
     --text-color: #1a1c20;
     --link-color: #4a76ee;
     --background-color: #eeeff1;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #eeeff1;
+        --background-color: #1a1c20;
+        --link-color: #82aaff;
+    }
 }
 
 * {
@@ -16,6 +26,7 @@ html {
 
 body {
     font-family: "Fira Code", serif;
+    color: var(--text-color);
     background-color: var(--background-color);
     max-width: 1400px;
     margin: 0px auto;
