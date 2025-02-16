@@ -173,6 +173,13 @@ nav .trailing a:last-child {
     filter: brightness(.9);
 }
 
+footer {
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    color: var(--text-color);
+}
+
 @media (max-width: 740px) {
     /* Section 1: Hero */ 
     .hero-section {
