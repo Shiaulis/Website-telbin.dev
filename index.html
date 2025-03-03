@@ -11,13 +11,25 @@
 	<!-- Fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-	<meta name="description" content="Andrius Shiaulis is an iOS Developer with 8 years of experience specializing in Swift, Modern Concurrency and user-friendy UI. Explore their portfolio to know more.">
+	<meta name="description" content="Senior iOS Developer with 8+ years of experience in Swift and Modern Concurrency. Passionate about user-friendly UI and building great apps.">
 	<meta name="keywords" content="iOS Developer, Swift, UIKit, async/await, Modern Collection Views, Mobile Apps, Portfolio">
-	<meta name="author" conteent="Andrius Shiaulis">
+	<meta name="author" content="Andrius Shiaulis">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta property="og:title" content="Andrius Shiaulis - Senior iOS Developer">
+	<meta property="og:description" content="8+ years of experience in Swift, async/await, and building user-friendly mobile apps.">
+	<meta property="og:image" content="https://telbin.dev/images/hero-headshot.webp">
+	<meta property="og:url" content="https://telbin.dev">
+	<meta property="og:type" content="website">
+
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Andrius Shiaulis - iOS Developer">
+	<meta name="twitter:description" content="8+ years of experience in Swift, async/await, and building user-friendly mobile apps.">
+	<meta name="twitter:image" content="https://telbin.dev/images/hero-headshot.webp">
+
 </head>
 <body>
 	<!-- Navigation Bar-->
@@ -27,17 +39,17 @@
 		</div>
 
 		<div class="trailing">
-			<a href="http://github.com/shiaulis" target="_blank" rel="noopener no-referrer">
+			<a href="http://github.com/shiaulis" target="_blank" rel="noopener noreferrer">
 				<i class="fa-brands fa-github"></i>
 				<span>Github</span>
 			</a>
 
-			<a href="http://linkedin.com/in/shiaulis/" target="_blank" rel="noopener no-referrer">
+			<a href="http://linkedin.com/in/shiaulis/" target="_blank" rel="noopener noreferrer">
 				<i class="fa-brands fa-linkedin"></i>
 				<span>Linkedin</span>
 			</a>
 
-			<a href="mailto:andrius@telbin.dev">
+			<a href="mailto:andrius@telbin.dev" rel="noopener noreferrer">
 				<i class="fa-solid fa-envelope"></i>
 				<span>Email</span>
 			</a>
@@ -47,7 +59,7 @@
 		<!-- Section 1: Hero -->
 		 <section class="hero-section">
 			<div class="text">
-				<h2>Hello from Andrius 👋🏾</h2>
+				<h1>Hello from Andrius 👋🏾</h1>
 				<p>I'm passionate iOS developer with 8+ years of experience. Great apps aren’t just functional — they should feel natural, be accessible to everyone, and meet both simple and complex user needs.</p>
 				
 				<p>By day, I work as a Senior iOS Developer at Pipedrive, making sure things run smoothly. In my spare time, I dive into everything from backend/frontend web development to productivity tools, touch typing, and even content creation. I love learning new things and new skills, building complex solutions, and sharing knowledge with others.</p>
@@ -65,7 +77,7 @@
 				</div>
 			</div>
 			<div class="headshot">
-				<img src="images/hero-headshot.webp" alt="andrius shiaulis headshot">
+				<img src="images/hero-headshot.webp" alt="Andrius Shiaulis - Senior iOS Developer" loading="lazy" height="320" width="320">
 			</div>
 		 </section>
 
@@ -86,13 +98,13 @@
 				</div>
 				<form action="https://formsubmit.co/andrius@telbin.dev" method="post">
 					<label for="name">Name</label>
-					<input type="text" id="name" name="name">
+					<input type="text" id="name" name="name" aria-label="Your Name" required>
 
 					<label for="email">Email</label>
-					<input type="text" id="email" name="email">
+					<input type="email" id="email" name="email" aria-label="Your Email">
 
 					<label for="message">Message</label>
-					<textarea id="message" cols="30" rows="10" name="message"></textarea>
+					<textarea id="message" cols="30" rows="10" name="message" aria-label="Your Message" required></textarea>
 
 					<input type="hidden" name="_next" value="https://telbin.dev/thanks.html">
 					<input type="hidden" name="_subject" value="Message from contact form">
@@ -109,5 +121,18 @@
 	<script>
 		document.getElementById('year').textContent = new Date().getFullYear();
 	</script>
+	<script type="application/ld+json">
+		{
+		  "@context": "https://schema.org",
+		  "@type": "Person",
+		  "name": "Andrius Shiaulis",
+		  "jobTitle": "Senior iOS Developer",
+		  "url": "https://telbin.dev",
+		  "sameAs": [
+			"https://github.com/shiaulis",
+			"https://linkedin.com/in/shiaulis"
+		  ]
+		}
+		</script>
 </body>
 </html>
