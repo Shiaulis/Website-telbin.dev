@@ -53,43 +53,38 @@ public/
 
 ## Blog Post Management
 
-**Blog posts are managed in Obsidian vault:**
+**Blog posts are written directly in Obsidian:**
 
-Source location: `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Zettelkasten/blog`
+User has Obsidian vault pointing to: `src/content/blog/`
 
-**Folder structure:**
-- `not-published/` - Draft posts ready to be published
-- `published/` - Posts that have been published to the blog
+**Simplified workflow:**
 
-**Publishing workflow:**
+1. User writes markdown files directly in `src/content/blog/` using Obsidian
+2. Astro automatically picks up new/edited posts (hot reload in dev mode)
+3. No conversion needed - write directly in Astro format:
+   ```yaml
+   ---
+   title: "Post Title"
+   description: "Brief description"
+   pubDate: 2025-10-03
+   tags: ["tag1", "tag2"]
+   ---
 
-1. User writes posts in `not-published/` folder (markdown files with frontmatter)
-2. When user requests to publish new posts:
-   - Scan `not-published/` folder for all `.md` files
-   - For each file:
-     a. Extract title from H1 heading (or use filename if no H1)
-     b. Generate description from first paragraph (or ask user)
-     c. Extract date from frontmatter `date` field
-     d. Use all tags from frontmatter `tags` array as-is
-     e. Convert to Astro format and save to `src/content/blog/[slug].md`:
-        ```yaml
-        ---
-        title: "Exploring Astro + Claude Code"
-        description: "Building a blog with Astro and AI assistance"
-        pubDate: 2025-10-03
-        tags: ["astro", "claude-code", "website"]
-        ---
-        ```
-     f. **AFTER successful conversion**: Move source file from `not-published/` to `published/`
-3. Preview locally with `npm run dev`
-4. Deploy after user approval
+   Post content here...
+   ```
+4. Preview automatically updates at http://localhost:4321/blog
+5. When ready to deploy, commit and push as usual
+
+**Frontmatter requirements:**
+- `title` (string) - Post title
+- `description` (string) - Brief description for listing/SEO
+- `pubDate` (date) - Publication date in YYYY-MM-DD format
+- `tags` (array) - Array of tag strings
 
 **Important:**
-- Files in `not-published/` = unpublished posts
-- After publishing, move file to `published/` to prevent re-syncing
-- Keep all tags from source file in destination (no filtering)
-- Expected tag format in Obsidian: simple array under `tags:` key
-- Generate slug from filename or H1 heading for clean URLs
+- `.obsidian/` folder is gitignored (Obsidian settings won't be committed)
+- Write posts in Astro-compatible frontmatter format from the start
+- No conversion workflow needed - direct editing!
 
 ## Deployment
 
