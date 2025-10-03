@@ -17,13 +17,29 @@ npm run preview      # Preview build locally before deploying
 
 ## Architecture
 
-**Simple single-page site structure:**
-- `src/pages/index.astro` - Main page with inline HTML (not using Layout.astro component)
-- `src/styles/styles.css` - All styles including dark mode support
-- `src/layouts/Layout.astro` - Unused layout component (site uses inline HTML instead)
-- `public/` - Static assets (favicon, images)
+**Component-based single-page portfolio:**
 
-**Note:** The site currently doesn't use Astro layouts or components in the main page. All content is in `src/pages/index.astro` as a single-page portfolio.
+```
+src/
+├── components/
+│   ├── Navigation.astro       - Top navigation bar with social links
+│   ├── Footer.astro            - Footer with copyright year
+│   ├── HeroSection.astro       - Hero section with bio and headshot
+│   ├── ExperienceSection.astro - Experience section (placeholder)
+│   └── ContactSection.astro    - Contact form section
+├── layouts/
+│   └── BaseLayout.astro        - Base HTML structure with meta tags, SEO
+├── pages/
+│   └── index.astro             - Main page (composes all components)
+└── styles/
+    └── global.css              - All styles including dark mode support
+
+public/
+├── images/                     - Images (headshot, etc.)
+└── favicon.svg
+```
+
+**Adding new sections:** Create a new component in `src/components/` and import it in `index.astro`.
 
 ## Deployment
 
