@@ -57,24 +57,32 @@ public/
 
 Source location: `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Zettelkasten/blog`
 
-**Workflow for publishing new blog posts:**
+**Publishing workflow:**
 
-1. User writes posts in Obsidian vault (markdown files with frontmatter)
-2. When user requests to publish new posts, check the Obsidian blog folder for new entries
-3. Copy new/updated `.md` files to `src/content/blog/`
-4. Ensure frontmatter is compatible with Astro Content Collections schema:
-   ```yaml
-   ---
-   title: "Post Title"
-   description: "Brief description"
-   pubDate: 2025-03-16
-   tags: ["tag1", "tag2"]
-   ---
-   ```
-5. Preview locally with `npm run dev`
-6. Deploy after user approval
+1. User writes posts in Obsidian (markdown files with Obsidian-style frontmatter)
+2. When user requests to publish new posts:
+   - Check Obsidian blog folder for files WITHOUT "published" tag
+   - For each unpublished post:
+     - Extract title from H1 heading or filename
+     - Generate description from first paragraph (or ask user)
+     - Convert Obsidian frontmatter to Astro-compatible format:
+       ```yaml
+       ---
+       title: "Post Title"
+       description: "Brief description"
+       pubDate: 2025-03-16
+       tags: ["tag1", "tag2"]  # Exclude "published" tag from destination
+       ---
+       ```
+     - Copy converted content to `src/content/blog/[slug].md`
+     - Add "published" tag to original Obsidian file to mark it as synced
+3. Preview locally with `npm run dev`
+4. Deploy after user approval
 
-**Note:** The blog posts are automatically picked up by Astro's Content Collections system once added to `src/content/blog/`.
+**Important:**
+- The "published" tag is only for tracking in Obsidian - never include it in destination files
+- Obsidian files may have different frontmatter format (date as array, etc.) - convert to Astro format
+- Use filename or H1 heading as slug for the blog post URL
 
 ## Deployment
 
