@@ -57,34 +57,39 @@ public/
 
 User has Obsidian vault pointing to: `src/content/blog/`
 
-**Simplified workflow:**
+**Publishing workflow:**
 
-1. User writes markdown files directly in `src/content/blog/` using Obsidian
-2. Astro automatically picks up new/edited posts (hot reload in dev mode)
-3. No conversion needed - write directly in Astro format:
-   ```yaml
-   ---
-   title: "Post Title"
-   description: "Brief description"
-   pubDate: 2025-10-03
-   tags: ["tag1", "tag2"]
-   ---
+1. User creates new markdown files in Obsidian (in `src/content/blog/`)
+2. **Drafts:** User marks work-in-progress posts with `draft: true` in frontmatter
+3. **Publishing:** When user wants to publish a draft, they ask Claude to remove the `draft: true` line
+4. Blog listing automatically filters out drafts from the live site
+5. Drafts are visible locally at http://localhost:4321/blog for preview
 
-   Post content here...
-   ```
-4. Preview automatically updates at http://localhost:4321/blog
-5. When ready to deploy, commit and push as usual
+**Frontmatter format:**
+```yaml
+---
+title: "Post Title"
+description: "Brief description"
+pubDate: 2025-10-03
+draft: true              # Optional: omit or set to false to publish
+tags: ["tag1", "tag2"]
+---
+
+Post content here...
+```
 
 **Frontmatter requirements:**
 - `title` (string) - Post title
 - `description` (string) - Brief description for listing/SEO
 - `pubDate` (date) - Publication date in YYYY-MM-DD format
+- `draft` (boolean) - Optional, `true` = not published, omit or `false` = published
 - `tags` (array) - Array of tag strings
 
 **Important:**
 - `.obsidian/` folder is gitignored (Obsidian settings won't be committed)
-- Write posts in Astro-compatible frontmatter format from the start
-- No conversion workflow needed - direct editing!
+- User writes freely in Obsidian, posts stay as drafts until explicitly published
+- To publish a post: remove `draft: true` from frontmatter (or set `draft: false`)
+- Blog listing filters drafts automatically
 
 ## Deployment
 
