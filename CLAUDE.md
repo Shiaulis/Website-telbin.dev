@@ -57,32 +57,38 @@ public/
 
 Source location: `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Zettelkasten/blog`
 
+**Folder structure:**
+- `not-published/` - Draft posts ready to be published
+- `published/` - Posts that have been published to the blog
+
 **Publishing workflow:**
 
-1. User writes posts in Obsidian (markdown files with Obsidian-style frontmatter)
+1. User writes posts in `not-published/` folder (markdown files with frontmatter)
 2. When user requests to publish new posts:
-   - Scan Obsidian blog folder: `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Zettelkasten/blog`
-   - **Find files WITHOUT "published" in tags** - these are unpublished posts
-   - For each unpublished post:
-     a. Extract title from H1 heading or filename
+   - Scan `not-published/` folder for all `.md` files
+   - For each file:
+     a. Extract title from H1 heading (or use filename if no H1)
      b. Generate description from first paragraph (or ask user)
-     c. Convert to Astro format and save to `src/content/blog/[slug].md`:
+     c. Extract date from frontmatter `date` field
+     d. Use all tags from frontmatter `tags` array as-is
+     e. Convert to Astro format and save to `src/content/blog/[slug].md`:
         ```yaml
         ---
-        title: "Post Title"
-        description: "Brief description"
-        pubDate: 2025-03-16
-        tags: ["blog", "website"]  # Other tags, but NOT "published"
+        title: "Exploring Astro + Claude Code"
+        description: "Building a blog with Astro and AI assistance"
+        pubDate: 2025-10-03
+        tags: ["astro", "claude-code", "website"]
         ---
         ```
-     d. **AFTER successful conversion**: Add "published" to tags in the SOURCE Obsidian file
+     f. **AFTER successful conversion**: Move source file from `not-published/` to `published/`
 3. Preview locally with `npm run dev`
 4. Deploy after user approval
 
 **Important:**
-- "published" tag is ONLY for tracking in Obsidian - never include it in destination blog files
-- After adding "published" tag to source file, that post won't be picked up again on next sync
-- Obsidian frontmatter format differs from Astro (dates as arrays, etc.) - always convert
+- Files in `not-published/` = unpublished posts
+- After publishing, move file to `published/` to prevent re-syncing
+- Keep all tags from source file in destination (no filtering)
+- Expected tag format in Obsidian: simple array under `tags:` key
 - Generate slug from filename or H1 heading for clean URLs
 
 ## Deployment
