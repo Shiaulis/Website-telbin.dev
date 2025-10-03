@@ -46,22 +46,44 @@ nav {
     height: 80px;
 }
 
-nav .leading a {
+nav .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+nav .nav-brand {
     color: var(--text-color);
     font-size: 20px;
-    font-weight: 400;
+    font-weight: 700;
 }
 
-nav .trailing a {
+nav .nav-link {
     color: var(--text-color);
-    margin: 0 4px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.2s;
 }
 
-nav .trailing a:last-child {
-    color: var(--background-color);
-    background-color: var(--text-color);
-    padding: 4px 16px;
-    border-radius: 4px;
+nav .nav-link:hover {
+    color: var(--link-color);
+}
+
+nav .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+nav .social-link {
+    color: var(--text-color);
+    font-size: 22px;
+    padding: 8px;
+    transition: color 0.2s;
+}
+
+nav .social-link:hover {
+    color: var(--link-color);
 }
 
 /* Section 1: Hero */
@@ -279,18 +301,25 @@ footer {
         padding: 0 20px;
     }
 
-    nav .trailing a {
-        font-size: 22px;
+    nav .nav-left {
+        gap: 16px;
     }
 
-    nav .trailing a:last-child {
-        color: var(--text-color);
-        background-color: transparent;
+    nav .nav-brand {
+        font-size: 18px;
     }
 
-     nav .trailing a span {
-        display: none;
-     }
+    nav .nav-link {
+        font-size: 14px;
+    }
+
+    nav .nav-right {
+        gap: 4px;
+    }
+
+    nav .social-link {
+        padding: 4px;
+    }
 
      /* Section 1: Hero */
      .hero-section {
