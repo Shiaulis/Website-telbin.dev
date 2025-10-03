@@ -51,7 +51,30 @@ public/
 
 **Adding new sections:** Create a new component in `src/components/` and import it in `index.astro`.
 
-**Adding blog posts:** Create a new `.md` file in `src/content/blog/` with frontmatter (title, description, pubDate, tags).
+## Blog Post Management
+
+**Blog posts are managed in Obsidian vault:**
+
+Source location: `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Zettelkasten/blog`
+
+**Workflow for publishing new blog posts:**
+
+1. User writes posts in Obsidian vault (markdown files with frontmatter)
+2. When user requests to publish new posts, check the Obsidian blog folder for new entries
+3. Copy new/updated `.md` files to `src/content/blog/`
+4. Ensure frontmatter is compatible with Astro Content Collections schema:
+   ```yaml
+   ---
+   title: "Post Title"
+   description: "Brief description"
+   pubDate: 2025-03-16
+   tags: ["tag1", "tag2"]
+   ---
+   ```
+5. Preview locally with `npm run dev`
+6. Deploy after user approval
+
+**Note:** The blog posts are automatically picked up by Astro's Content Collections system once added to `src/content/blog/`.
 
 ## Deployment
 
