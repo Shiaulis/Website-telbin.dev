@@ -1,6 +1,28 @@
+---
+import { experiences } from '../data/experience';
+---
+
 <section id="experience" class="experience-section">
 	<h2>Experience</h2>
-	<div class="text">
-		<i>To be updated…</i>
+	<div class="timeline">
+		{experiences.map((exp) => (
+			<div class="experience-group">
+				<h3 class="company-name">{exp.company}</h3>
+				{exp.positions.map((position) => (
+					<div class="position">
+						<div class="position-header">
+							<h4 class="position-title">{position.title}</h4>
+							<span class="position-period">{position.period}</span>
+						</div>
+						{position.location && (
+							<p class="position-location">{position.location}</p>
+						)}
+						{position.description && (
+							<p class="position-description">{position.description}</p>
+						)}
+					</div>
+				))}
+			</div>
+		))}
 	</div>
 </section>
