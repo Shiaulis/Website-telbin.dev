@@ -61,28 +61,29 @@ Source location: `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Zettel
 
 1. User writes posts in Obsidian (markdown files with Obsidian-style frontmatter)
 2. When user requests to publish new posts:
-   - Check Obsidian blog folder for files WITHOUT "published" tag
+   - Scan Obsidian blog folder: `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Zettelkasten/blog`
+   - **Find files WITHOUT "published" in tags** - these are unpublished posts
    - For each unpublished post:
-     - Extract title from H1 heading or filename
-     - Generate description from first paragraph (or ask user)
-     - Convert Obsidian frontmatter to Astro-compatible format:
-       ```yaml
-       ---
-       title: "Post Title"
-       description: "Brief description"
-       pubDate: 2025-03-16
-       tags: ["tag1", "tag2"]  # Exclude "published" tag from destination
-       ---
-       ```
-     - Copy converted content to `src/content/blog/[slug].md`
-     - Add "published" tag to original Obsidian file to mark it as synced
+     a. Extract title from H1 heading or filename
+     b. Generate description from first paragraph (or ask user)
+     c. Convert to Astro format and save to `src/content/blog/[slug].md`:
+        ```yaml
+        ---
+        title: "Post Title"
+        description: "Brief description"
+        pubDate: 2025-03-16
+        tags: ["blog", "website"]  # Other tags, but NOT "published"
+        ---
+        ```
+     d. **AFTER successful conversion**: Add "published" to tags in the SOURCE Obsidian file
 3. Preview locally with `npm run dev`
 4. Deploy after user approval
 
 **Important:**
-- The "published" tag is only for tracking in Obsidian - never include it in destination files
-- Obsidian files may have different frontmatter format (date as array, etc.) - convert to Astro format
-- Use filename or H1 heading as slug for the blog post URL
+- "published" tag is ONLY for tracking in Obsidian - never include it in destination blog files
+- After adding "published" tag to source file, that post won't be picked up again on next sync
+- Obsidian frontmatter format differs from Astro (dates as arrays, etc.) - always convert
+- Generate slug from filename or H1 heading for clean URLs
 
 ## Deployment
 
