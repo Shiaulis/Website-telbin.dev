@@ -1,0 +1,49 @@
+---
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title = "Andrius Shiaulis | iOS Developer",
+	description = "Senior iOS Developer with 8+ years of experience in Swift and Modern Concurrency. Passionate about user-friendly UI and building great apps."
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>{title}</title>
+	<meta name="description" content={description}>
+	<meta name="keywords" content="iOS Developer, Swift, UIKit, async/await, Modern Collection Views, Mobile Apps, Portfolio">
+	<meta name="author" content="Andrius Shiaulis">
+
+	<!-- Open Graph -->
+	<meta property="og:title" content={title}>
+	<meta property="og:description" content={description}>
+	<meta property="og:image" content="/images/hero-headshot.webp">
+	<meta property="og:url" content="https://telbin.dev">
+	<meta property="og:type" content="website">
+
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content={title}>
+	<meta name="twitter:description" content={description}>
+	<meta name="twitter:image" content="/images/hero-headshot.webp">
+
+	<!-- Favicon -->
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+	<!-- Fonts & Icons -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous">
+</head>
+<body>
+	<slot />
+</body>
+</html>
