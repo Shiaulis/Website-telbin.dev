@@ -2,12 +2,20 @@
 interface Props {
 	title?: string;
 	description?: string;
+	image?: string;
+	type?: 'website' | 'article';
 }
 
 const {
 	title = "Andrius Shiaulis | iOS Developer",
-	description = "Senior iOS Developer with 8+ years of experience in Swift and Modern Concurrency. Passionate about user-friendly UI and building great apps."
+	description = "Senior iOS Developer with 8+ years of experience in Swift and Modern Concurrency. Passionate about user-friendly UI and building great apps.",
+	image = "/images/hero-headshot.webp",
+	type = "website",
 } = Astro.props;
+
+const siteURL = Astro.site ?? new URL('https://telbin.dev');
+const canonicalURL = new URL(Astro.url.pathname, siteURL);
+const imageURL = new URL(image, siteURL);
 ---
 
 <!DOCTYPE html>
@@ -20,19 +28,20 @@ const {
 	<meta name="description" content={description}>
 	<meta name="keywords" content="iOS Developer, Swift, UIKit, async/await, Modern Collection Views, Mobile Apps, Portfolio">
 	<meta name="author" content="Andrius Shiaulis">
+	<link rel="canonical" href={canonicalURL}>
 
 	<!-- Open Graph -->
 	<meta property="og:title" content={title}>
 	<meta property="og:description" content={description}>
-	<meta property="og:image" content="/images/hero-headshot.webp">
-	<meta property="og:url" content="https://telbin.dev">
-	<meta property="og:type" content="website">
+	<meta property="og:image" content={imageURL}>
+	<meta property="og:url" content={canonicalURL}>
+	<meta property="og:type" content={type}>
 
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:title" content={title}>
 	<meta name="twitter:description" content={description}>
-	<meta name="twitter:image" content="/images/hero-headshot.webp">
+	<meta name="twitter:image" content={imageURL}>
 
 	<!-- Favicon -->
 	<link rel="icon" type="image/svg+xml" href="/favicon.svg">

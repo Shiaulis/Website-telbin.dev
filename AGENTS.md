@@ -4,6 +4,10 @@
 
 Personal portfolio website for Andrius Shiaulis, an iOS developer. Built with Astro 7.4.7 and deployed automatically via GitHub Actions to Hostinger FTP.
 
+## Communication
+
+The repository owner is a Senior iOS developer, not primarily a web developer. On every web change (Astro, HTML, CSS, SEO, or CI), include a very brief explanation of why the change is needed and what practical difference it makes.
+
 ## Development commands
 
 ```bash
