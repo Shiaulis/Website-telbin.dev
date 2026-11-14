@@ -103,6 +103,16 @@ nav .social-link:hover {
 
 .hero-section .text h1 {
     font-size: 32px;
+    margin-bottom: 16px;
+}
+
+.hero-section .text p {
+    margin-bottom: 14px;
+    line-height: 1.6;
+}
+
+.hero-section .text p:last-of-type {
+    margin-bottom: 0;
 }
 
 .hero-section .text .links {
