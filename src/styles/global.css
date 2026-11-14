@@ -131,6 +131,7 @@ nav .social-link:hover {
 
 .hero-section .headshot img {
     width: 320px;
+    height: auto;
     border-radius: 50%;
 }
 
