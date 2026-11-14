@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://telbin.dev/sitemap-index.xml
