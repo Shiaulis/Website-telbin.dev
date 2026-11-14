@@ -242,7 +242,8 @@ nav .social-link:hover {
 
 .contact-section .group form input,
 .contact-section .group form textarea {
-    font-family: Fira Code, sans-serif;
+    font-family: "Fira Code", sans-serif;
+    color: var(--text-color);
     border: 1px solid var(--link-color);
     background-color: transparent;
     padding: 10px;
@@ -551,4 +552,26 @@ footer {
     .post-content h3 {
         font-size: 20px;
     }
+
+    .thanks-section {
+        padding: 40px 20px;
+    }
+}
+
+/* Thanks Page */
+
+.thanks-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 80px 44px;
+}
+
+.thanks-section h1 {
+    font-size: 32px;
+    margin-bottom: 16px;
+}
+
+.thanks-section p {
+    margin-bottom: 24px;
+    line-height: 1.6;
 }

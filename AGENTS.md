@@ -1,0 +1,102 @@
+# Project instructions
+
+## Project overview
+
+Personal portfolio website for Andrius Shiaulis, an iOS developer. Built with Astro 7.4.7 and deployed automatically via GitHub Actions to Hostinger FTP.
+
+## Development commands
+
+```bash
+npm ci               # Install the exact dependencies from package-lock.json
+npm run dev          # Start dev server at localhost:4321
+npm run build        # Build production site to ./dist/
+npm run preview      # Preview build locally before deploying
+npm run check        # Run Astro/TypeScript diagnostics
+```
+
+There is no test script in `package.json`; use `npm run check` and `npm run build` to verify changes unless the user requests another verification step.
+
+## Architecture
+
+Component-based portfolio with a blog:
+
+```text
+src/
+├── components/
+│   ├── Navigation.astro         - Top navigation bar with social links
+│   ├── Footer.astro              - Footer with copyright year
+│   ├── HeroSection.astro         - Hero section with bio and headshot
+│   ├── ExperienceSection.astro   - Experience timeline (uses data/experience.ts)
+│   └── ContactSection.astro      - Contact form section
+├── content.config.ts             - Content Collections configuration
+├── content/
+│   └── blog/                     - Blog posts (Markdown)
+├── data/
+│   └── experience.ts             - Professional experience data
+├── layouts/
+│   └── BaseLayout.astro          - Base HTML structure with meta tags, SEO
+├── pages/
+│   ├── index.astro               - Main page (composes all components)
+│   ├── thanks.astro              - Contact form confirmation page
+│   └── blog/
+│       ├── index.astro           - Blog listing page
+│       └── [...slug].astro       - Dynamic blog post pages
+└── styles/
+    └── global.css                - All styles including dark mode support
+
+public/
+├── images/                       - Images (headshot, etc.)
+└── favicon.svg
+```
+
+To add a section, create a component in `src/components/` and import it in `src/pages/index.astro`.
+
+## Blog post management
+
+Blog posts are written directly in Obsidian. The user's Obsidian vault points to `src/content/blog/`.
+
+- The user creates Markdown files there.
+- Work in progress posts can use `draft: true` in frontmatter.
+- When asked to publish a draft, remove `draft: true` (or set it to `false`).
+- Drafts are included in local development previews and filtered from the production listing and generated routes. The `draft` flag is a publishing control, not a privacy control for source files committed to the repository.
+- Drafts appear in the local `/blog` listing and can be previewed at their `/blog/<slug>/` URL.
+- `.obsidian/` is gitignored.
+
+Frontmatter format:
+
+```yaml
+---
+title: "Post Title"
+description: "Brief description"
+pubDate: 2025-10-03
+draft: true              # Optional: true hides the post from published listing
+tags: ["tag1", "tag2"]
+---
+
+Post content here...
+```
+
+Required fields: `title` (string), `description` (string), and `pubDate` (date in `YYYY-MM-DD` format). `draft` is optional and boolean; `tags` is an array of strings.
+
+## Deployment
+
+Pushes to `master` automatically trigger `.github/workflows/deploy.yml`, which builds the Astro site and deploys `dist/` to Hostinger via FTP. The required `FTP_HOST`, `FTP_USER`, `FTP_PASS`, and `FTP_TARGET_DIR` secrets are already configured.
+
+Before deploying, let the user test changes locally:
+
+1. Make the requested changes.
+2. Run `npm run dev` and make the local preview available at `http://localhost:4321/`.
+3. Let the user preview and approve the changes.
+4. Only after approval, commit, push, and deploy.
+5. Monitor the GitHub Actions deployment to completion.
+
+Never push changes without the user's testing and approval first.
+
+## Key features
+
+- Type-safe blog content collections with Markdown and tags.
+- Experience timeline driven by `src/data/experience.ts`.
+- Automatic dark mode via CSS media queries.
+- Open Graph and Twitter Card metadata.
+- Contact form integrated with FormSubmit.co.
+- Responsive mobile navigation and layouts.

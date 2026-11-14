@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<BaseLayout
+	title="Message Sent | Andrius Shiaulis"
+	description="Thank you for reaching out."
+>
+	<Navigation />
+	<main>
+		<section class="thanks-section">
+			<h1>Thank you!</h1>
+			<p>Your message has been sent. I'll get back to you as soon as possible.</p>
+			<a href="/" class="back-link">
+				<i class="fa-solid fa-arrow-left"></i> Back to Home
+			</a>
+		</section>
+	</main>
+	<Footer />
+</BaseLayout>
