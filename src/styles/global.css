@@ -405,6 +405,7 @@ footer {
 }
 
 .blog-post-card a {
+    display: block;
     text-decoration: none;
     color: var(--text-color);
 }
@@ -508,6 +509,15 @@ footer {
 
 .post-content p {
     margin-bottom: 16px;
+}
+
+.post-content a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.post-content a:hover {
+    opacity: 0.85;
 }
 
 .post-content ul,
