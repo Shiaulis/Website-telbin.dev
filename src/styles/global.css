@@ -1,8 +1,9 @@
 /* Default (light) mode */
 :root {
     --text-color: #1a1c20;
-    --link-color: #4a76ee;
+    --link-color: #365fd1;
     --background-color: #eeeff1;
+    --button-text-color: #ffffff;
 }
 
 /* Dark mode */
@@ -11,6 +12,7 @@
         --text-color: #eeeff1;
         --background-color: #1a1c20;
         --link-color: #4c9aff;
+        --button-text-color: #1a1c20;
     }
 }
 
@@ -286,7 +288,7 @@ nav .social-link:hover {
 .contact-section .group form button {
     font-family: "Fira Code", monospace;
     font-size: 16px;
-    color: white;
+    color: var(--button-text-color);
     background-color: var(--link-color);
     border: none;
     border-radius: 4px;
@@ -517,7 +519,7 @@ footer {
 }
 
 .post-content a:hover {
-    opacity: 0.85;
+    text-decoration-thickness: 2px;
 }
 
 .post-content ul,
