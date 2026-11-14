@@ -25,7 +25,7 @@ html {
 }
 
 body {
-    font-family: "Fira Code", serif;
+    font-family: "Fira Code", monospace;
     color: var(--text-color);
     background-color: var(--background-color);
     max-width: 1400px;
@@ -101,7 +101,7 @@ nav .social-link:hover {
     flex: 5;
 }
 
-.hero-section .text h2 {
+.hero-section .text h1 {
     font-size: 32px;
 }
 
@@ -136,7 +136,7 @@ nav .social-link:hover {
 
 @media (max-width: 850px) {
    /* Section 1: Hero */ 
-   .hero-section .text h2 {
+   .hero-section .text h1 {
     font-size: 24px;
    }
 }
@@ -242,7 +242,7 @@ nav .social-link:hover {
 
 .contact-section .group form input,
 .contact-section .group form textarea {
-    font-family: "Fira Code", sans-serif;
+    font-family: "Fira Code", monospace;
     color: var(--text-color);
     border: 1px solid var(--link-color);
     background-color: transparent;
@@ -254,7 +254,7 @@ nav .social-link:hover {
 }
 
 .contact-section .group form button {
-    font-family: Fira Code;
+    font-family: "Fira Code", monospace;
     font-size: 16px;
     color: white;
     background-color: var(--link-color);
@@ -282,7 +282,7 @@ footer {
         flex-direction: column-reverse;
     }
 
-    .hero-section .text h2 {
+    .hero-section .text h1 {
         text-align: center;
      }
 
