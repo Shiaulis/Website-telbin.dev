@@ -1,0 +1,2 @@
+# Serve the site's own 404 page for missing URLs (keeps the 404 status code)
+ErrorDocument 404 /404.html
