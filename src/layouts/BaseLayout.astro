@@ -1,4 +1,7 @@
 ---
+import { getImage } from 'astro:assets';
+import heroHeadshot from '../assets/hero-headshot.webp';
+
 interface Props {
 	title?: string;
 	description?: string;
@@ -10,14 +13,21 @@ interface Props {
 const {
 	title = "Andrius Shiaulis | iOS Developer",
 	description = "Senior iOS Developer with 9+ years of experience in Swift and Modern Concurrency. Passionate about user-friendly UI and building great apps.",
-	image = "/images/hero-headshot.webp",
+	image,
 	type = "website",
 	noindex = false,
 } = Astro.props;
 
 const siteURL = Astro.site ?? new URL('https://telbin.dev');
 const canonicalURL = new URL(Astro.url.pathname, siteURL);
-const imageURL = new URL(image, siteURL);
+const defaultImage = image ? undefined : await getImage({
+	src: heroHeadshot,
+	width: 640,
+	height: 640,
+	format: 'webp',
+	quality: 85,
+});
+const imageURL = new URL(image ?? defaultImage!.src, siteURL);
 ---
 
 <!DOCTYPE html>
