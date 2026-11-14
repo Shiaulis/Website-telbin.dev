@@ -213,6 +213,10 @@ nav .social-link:hover {
     margin: 12px 0;
     line-height: 1.6;
 }
+
+.experience-section .position-skills {
+    margin-top: 12px;
+}
 /* Section 3: Contact */
 
 .contact-section {
@@ -396,13 +400,17 @@ footer {
     line-height: 1.6;
 }
 
-.blog-post-card .post-tags {
+.experience-section .position-skills,
+.blog-post-card .post-tags,
+.post-header .post-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
 }
 
-.blog-post-card .tag {
+.experience-section .skill-tag,
+.blog-post-card .tag,
+.post-header .tag {
     display: inline-block;
     padding: 4px 12px;
     background-color: var(--link-color);
@@ -454,22 +462,6 @@ footer {
 
 .post-meta .updated {
     margin-left: 8px;
-}
-
-.post-header .post-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.post-header .tag {
-    display: inline-block;
-    padding: 4px 12px;
-    background-color: var(--link-color);
-    color: var(--background-color);
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 500;
 }
 
 .post-content {

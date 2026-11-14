@@ -20,6 +20,13 @@ import { experiences } from '../data/experience';
 						{position.description && (
 							<p class="position-description">{position.description}</p>
 						)}
+						{position.skills && position.skills.length > 0 && (
+							<div class="position-skills">
+								{position.skills.map((skill) => (
+									<span class="skill-tag">{skill}</span>
+								))}
+							</div>
+						)}
 					</div>
 				))}
 			</div>

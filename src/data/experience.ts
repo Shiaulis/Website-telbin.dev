@@ -1,6 +1,5 @@
 export interface Experience {
 	company: string;
-	logo?: string;
 	positions: Position[];
 }
 
