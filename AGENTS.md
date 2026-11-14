@@ -41,6 +41,7 @@ src/
 │   └── BaseLayout.astro          - Base HTML structure with meta tags, SEO
 ├── pages/
 │   ├── index.astro               - Main page (composes all components)
+│   ├── 404.astro                 - Custom 404 error page
 │   ├── thanks.astro              - Contact form confirmation page
 │   └── blog/
 │       ├── index.astro           - Blog listing page

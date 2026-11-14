@@ -546,25 +546,25 @@ footer {
         font-size: 20px;
     }
 
-    .thanks-section {
+    .status-section {
         padding: 40px 20px;
     }
 }
 
-/* Thanks Page */
+/* Status Pages (Thanks, 404) */
 
-.thanks-section {
+.status-section {
     max-width: 800px;
     margin: 0 auto;
     padding: 80px 44px;
 }
 
-.thanks-section h1 {
+.status-section h1 {
     font-size: 32px;
     margin-bottom: 16px;
 }
 
-.thanks-section p {
+.status-section p {
     margin-bottom: 24px;
     line-height: 1.6;
 }

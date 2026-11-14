@@ -4,6 +4,7 @@ interface Props {
 	description?: string;
 	image?: string;
 	type?: 'website' | 'article';
+	noindex?: boolean;
 }
 
 const {
@@ -11,6 +12,7 @@ const {
 	description = "Senior iOS Developer with 8+ years of experience in Swift and Modern Concurrency. Passionate about user-friendly UI and building great apps.",
 	image = "/images/hero-headshot.webp",
 	type = "website",
+	noindex = false,
 } = Astro.props;
 
 const siteURL = Astro.site ?? new URL('https://telbin.dev');
@@ -28,6 +30,7 @@ const imageURL = new URL(image, siteURL);
 	<meta name="description" content={description}>
 	<meta name="keywords" content="iOS Developer, Swift, UIKit, async/await, Modern Collection Views, Mobile Apps, Portfolio">
 	<meta name="author" content="Andrius Shiaulis">
+	{noindex && <meta name="robots" content="noindex">}
 	<link rel="canonical" href={canonicalURL}>
 
 	<!-- Open Graph -->
