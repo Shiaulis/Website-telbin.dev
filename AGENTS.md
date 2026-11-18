@@ -110,3 +110,12 @@ Never push changes without the user's testing and approval first.
 - Open Graph and Twitter Card metadata.
 - Contact form integrated with FormSubmit.co.
 - Responsive mobile navigation and layouts.
+
+## Review guidelines
+
+When reviewing pull requests for this repository:
+
+- Focus on real issues: broken routes/links, Astro/TypeScript errors, accessibility regressions, SEO/Open Graph metadata mistakes, light/dark mode contrast problems, and CI/security risks.
+- Skip minor formatting or stylistic nitpicks.
+- For dependency updates (e.g. Dependabot PRs), check for breaking changes or peer-dependency conflicts with Astro and `@astrojs/check`.
+- Keep feedback concise and explain web-specific issues briefly in practical terms.
