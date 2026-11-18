@@ -1,112 +1,107 @@
-export interface Experience {
-	company: string;
-	positions: Position[];
-}
-
-export interface Position {
+export interface RolePeriod {
 	title: string;
 	period: string;
-	location?: string;
-	description?: string;
-	highlights?: string[];
-	skills?: string[];
 }
+
+export interface Highlight {
+	label?: string;
+	text: string;
+}
+
+export interface Experience {
+	company: string;
+	location: string;
+	period: string;
+	roles: RolePeriod[];
+	description?: string;
+	highlights: Highlight[];
+}
+
+export interface Competency {
+	category: string;
+	items: string;
+}
+
+export const competencies: Competency[] = [
+	{
+		category: "AI & Daily Workflows",
+		items: "Practical AI adoption for individuals and teams, custom AI agent instructions and skills, AI-powered personal knowledge systems (Obsidian), workflow automation"
+	},
+	{
+		category: "Complex Systems & Architecture",
+		items: "Diving deep into unfamiliar systems, architecture consulting, modularizing legacy code, local persistence and offline sync"
+	},
+	{
+		category: "People, Teaching & Mentoring",
+		items: "Technical interviewing (30+ candidates), explaining complex ideas simply, creating training courses, mentoring engineers, cross-team collaboration"
+	},
+	{
+		category: "Continuous Learning & Research",
+		items: "Rapidly picking up new tools and domains, testing emerging technologies, turning experiments into practical daily habits"
+	},
+	{
+		category: "Technical Background",
+		items: "Swift, Objective-C, basic C / Python / Ruby / HTML & CSS, Git, CI/CD automation, automated testing (XCTest, Swift Testing)"
+	}
+];
 
 export const experiences: Experience[] = [
 	{
 		company: "Pipedrive",
-		positions: [
+		location: "Tallinn, Estonia",
+		period: "Oct 2018 – Dec 2026",
+		roles: [
+			{ title: "Senior Software Engineer", period: "Jan 2022 – Dec 2026" },
+			{ title: "Software Engineer", period: "Oct 2018 – Jan 2022" }
+		],
+		description: "Guided a 5-person engineering team, helping turn everyday customer needs into reliable software while improving how the team works and uses AI.",
+		highlights: [
 			{
-				title: "Senior iOS Developer",
-				period: "Jan 2022 - Nov 2026",
-				location: "Tallinn, Estonia",
-				description: "Set technical direction for a five-person iOS team, combining hands-on development, architecture, and cross-platform project coordination.",
-				highlights: [
-					"Replaced legacy Objective-C persistence with a modular Swift Core Data stack across the main app and extensions.",
-					"Built shared networking infrastructure and modernized synchronization in Swift.",
-					"Co-developed CRM search with offline fallback and implemented iOS web authentication with PKCE and two-factor support.",
-					"Established shared implementation patterns through architectural plans, code reviews, and reusable generic components.",
-					"Developed an iOS internship course and mentored an intern into a full-time developer role.",
-					"Refactored CI/CD pipelines, cutting pull request check build times by 50%."
-				],
-				skills: ["Swift", "Core Data", "Software Architecture", "Technical Leadership", "CI/CD"]
+				label: "Helping the Team Use AI",
+				text: "Explored and brought AI tools into our daily work; wrote clear instructions and reusable skills for AI agents, reorganized the project structure, and set up automated checks so both AI assistants and teammates from other areas could make changes safely."
 			},
 			{
-				title: "iOS Developer",
-				period: "Oct 2018 - Jan 2022",
-				location: "Tallinn, Estonia",
-				description: "Led end-to-end feature delivery from planning to release, coordinating developers, design, and product management.",
-				highlights: [
-					"Built persistence, networking, and business-logic foundations for mobile Leads, connecting custom fields, timelines, linked records, and deep links.",
-					"Integrated audio recording, playback, synchronization, and speech transcription into activity notes and post-call workflows.",
-					"Built reusable XCUITest infrastructure to simplify UI test development for the QA team.",
-					"Contributed to dark mode and improved Dynamic Type, VoiceOver support, and accessible layouts across CRM screens."
-				],
-				skills: ["Swift", "UIKit", "XCUITest", "Accessibility", "Mobile Platforms"]
+				label: "Architecture Consulting, Hiring & Mentorship",
+				text: "Acted as the team's go-to advisor for all architectural decisions, helping teammates design solutions and review plans. Conducted 30+ technical interviews, created an internship course from scratch, and mentored an intern into a full-time engineer."
+			},
+			{
+				label: "Building Practical Features",
+				text: "Worked closely with designers and product managers to build core features for Pipedrive CRM, like recording voice notes with automatic text transcription, fast offline search, and lead tracking."
+			},
+			{
+				label: "Dealing With Complex Systems",
+				text: "Rewrote several old app modules to modern standards, including the persistence layer and synchronization engine."
+			},
+			{
+				label: "Continuous Learning & Modern Tooling",
+				text: "Stayed on top of the latest platform capabilities, developer tools, and AI workflows, regularly bringing new features and tooling into our app so customers and the team always had a modern experience."
 			}
 		]
 	},
 	{
 		company: "Readdle",
-		positions: [
+		location: "Odesa, Ukraine",
+		period: "Nov 2015 – Sep 2018",
+		roles: [
+			{ title: "Software Engineer", period: "Sep 2017 – Sep 2018" },
+			{ title: "Software Test Engineer", period: "Nov 2015 – Oct 2017" }
+		],
+		highlights: [
 			{
-				title: "iOS Developer",
-				period: "Sep 2017 - Sep 2018",
-				location: "Odesa, Ukraine",
-				description: "Transitioned from QA into full-time iOS engineering on popular consumer apps with millions of users.",
-				highlights: [
-					"Developed UI and networking features for Documents and PDF Expert, primarily in Objective-C.",
-					"Implemented external storage integrations.",
-					"Contributed to refactoring legacy modules and app architecture."
-				],
-				skills: ["iOS Development", "Objective-C", "Networking", "Software Architecture"]
-			},
-			{
-				title: "Software Test Engineer",
-				period: "Nov 2015 - Oct 2017",
-				location: "Odesa, Ukraine",
-				description: "Tested consumer apps used by millions of users, including Documents and PDF Expert.",
-				highlights: [
-					"Performed manual testing across iOS releases.",
-					"Worked on test automation using the XCTest framework."
-				],
-				skills: ["XCTest", "Test Automation", "QA"]
-			}
-		]
-	},
-	{
-		company: "Мой Город",
-		positions: [
-			{
-				title: "Test Engineer",
-				period: "Sep 2015 - Dec 2015",
-				location: "Odesa, Ukraine",
-				description: "Tested a charity startup's website as a volunteer, helping improve quality and stability."
+				text: "Started in manual testing and taught myself test automation and software development on popular productivity apps (Documents and PDF Expert, used by millions); connected external cloud storage services, cleaned up older code, and automated release checks."
 			}
 		]
 	},
 	{
 		company: "Winner Odesa",
-		positions: [
+		location: "Odesa, Ukraine",
+		period: "Aug 2010 – Oct 2015",
+		roles: [
+			{ title: "Parts Department Manager", period: "Aug 2010 – Oct 2015" }
+		],
+		highlights: [
 			{
-				title: "Parts Department Manager",
-				period: "Aug 2010 - Oct 2015",
-				location: "Odesa, Ukraine",
-				description: "Managed a three-person team and oversaw parts supply, inventory, and sales across multiple stocks.",
-				highlights: [
-					"Created a demand forecasting system using historical sales data, reducing dead stock by nearly 50%."
-				]
-			}
-		]
-	},
-	{
-		company: "TM Auto",
-		positions: [
-			{
-				title: "Parts Advisor",
-				period: "Aug 2007 - Jun 2010",
-				location: "Odesa, Ukraine",
-				description: "Handled spare-parts sales and kept inventory organized."
+				text: "Managed a 3-person team and spare-parts inventory across multiple warehouses; taught myself data analysis to build a forecasting tool from past sales, cutting unsold stock by nearly 50%."
 			}
 		]
 	}

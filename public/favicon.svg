@@ -1,4 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-    <rect width="128" height="128" rx="28" fill="#1a1c20" />
-    <text x="64" y="66" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-family="ui-monospace, 'Fira Code', monospace" font-size="78" font-weight="800">T</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">Waypoint, adaptive favicon</title>
+  <style>
+    .t { fill: #1A1C20; }
+    .dot { fill: #4D6B1A; }
+    @media (prefers-color-scheme: dark) {
+      .t { fill: #EEEFF1; }
+      .dot { fill: #CBD689; }
+    }
+  </style>
+  <path class="t" d="M24 48H176V92H122V208H78V92H24Z"/>
+  <circle class="dot" cx="212" cy="70" r="20"/>
 </svg>

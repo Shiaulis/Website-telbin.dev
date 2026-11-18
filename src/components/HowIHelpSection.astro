@@ -1,0 +1,55 @@
+---
+const services = [
+	{
+		tag: "AI Workflows & Daily Routines",
+		audience: "For Teams & Individuals",
+		title: "Introduce practical AI into your company or personal workflow.",
+		details: "Set up AI-assisted engineering workflows, custom agent instructions, reusable skills, and AI-powered personal knowledge systems (like Obsidian) that fit naturally into everyday work."
+	},
+	{
+		tag: "System & Workflow Analysis",
+		audience: "Audits & Advisory",
+		title: "Analyze your current setup or system to find where AI actually helps.",
+		details: "Review your existing codebase, team processes, or daily tools, identify bottlenecks that benefit from AI or automation, and design a clear, safe setup you can trust."
+	},
+	{
+		tag: "Software Development Mentoring",
+		audience: "1-on-1 & Team Training",
+		title: "Mentor people into software development and build strong foundations.",
+		details: "Help beginners and growing engineers master core development fundamentals, problem-solving, testing, and modern tooling through structured guidance and clear explanations."
+	},
+	{
+		tag: "iOS App Development",
+		audience: "Product & Architecture",
+		title: "Build reliable iOS apps and modernize complex mobile codebases.",
+		details: "Take iOS products from early idea to App Store release, or untangle legacy Swift and Objective-C apps with modular architecture, offline sync, and rock-solid local storage."
+	}
+];
+---
+
+<section id="how-i-help" class="help-section">
+	<div class="help-header">
+		<span class="section-eyebrow">How I can help</span>
+		<h2>Practical ways we can work together</h2>
+	</div>
+
+	<div class="capability-grid">
+		{services.map((item) => (
+			<article class="capability-card">
+				<div class="card-top">
+					<span class="card-tag">{item.tag}</span>
+					<span class="card-meta">{item.audience}</span>
+				</div>
+				<h3 class="card-outcome">{item.title}</h3>
+				<div class="card-help">
+					<span class="help-label">What this includes:</span>
+					<p>{item.details}</p>
+				</div>
+			</article>
+		))}
+	</div>
+
+	<div class="help-footer-cta">
+		<a href="/about/" class="secondary-pill">More about me &amp; my background →</a>
+	</div>
+</section>

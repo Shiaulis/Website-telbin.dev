@@ -1,20 +1,274 @@
-<nav>
+---
+const isAbout = Astro.url.pathname.startsWith('/about');
+const isBlog = Astro.url.pathname.startsWith('/blog');
+---
+
+<nav aria-label="Primary">
 	<div class="nav-left">
-		<a href="/" class="nav-brand">Andrius Shiaulis</a>
-		<a href="/blog/" class="nav-link">Blog</a>
+		<a href="/" class="nav-brand">telbin<span class="nav-brand-dot">.</span>dev</a>
 	</div>
 
 	<div class="nav-right">
-		<a href="https://github.com/shiaulis" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
-			<i class="fa-brands fa-github"></i>
-		</a>
+		<a href="/about/" class="nav-link" aria-current={isAbout ? 'page' : undefined}>About</a>
+		<a href="/blog/" class="nav-link" aria-current={isBlog ? 'page' : undefined}>Blog</a>
 
-		<a href="https://linkedin.com/in/shiaulis/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
-			<i class="fa-brands fa-linkedin"></i>
-		</a>
+		<div class="contact-dropdown">
+			<button
+				id="contact-trigger"
+				type="button"
+				class="contact-trigger"
+				popovertarget="contact-popover"
+				aria-expanded="false"
+				aria-controls="contact-popover"
+			>
+				<span>Contact</span>
+				<svg
+					class="contact-chev"
+					width="14"
+					height="14"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2.2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					aria-hidden="true"
+				>
+					<path d="M6 9l6 6 6-6"></path>
+				</svg>
+			</button>
 
-		<a href="mailto:andrius@telbin.dev" rel="noopener noreferrer" class="social-link" aria-label="Email">
-			<i class="fa-solid fa-envelope"></i>
-		</a>
+			<div id="contact-popover" class="contact-popover" popover="auto">
+				<div class="contact-copy-row">
+					<button
+						type="button"
+						class="contact-item contact-copy-item"
+						command="--copy"
+						commandfor="contact-email-value"
+					>
+						<span class="contact-item-text">
+							<span class="contact-item-label">Email</span>
+							<span id="contact-email-value" class="contact-item-value">andrius@telbin.dev</span>
+						</span>
+						<span class="contact-item-icon" aria-hidden="true">
+							<svg
+								class="icon-copy"
+								width="18"
+								height="18"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							>
+								<rect x="9" y="9" width="11" height="11" rx="2"></rect>
+								<path d="M5 15V6a2 2 0 0 1 2-2h9"></path>
+							</svg>
+							<svg
+								class="icon-check"
+								width="18"
+								height="18"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2.4"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							>
+								<path d="M5 12.5l4.5 4.5L19 7.5" pathLength="1"></path>
+							</svg>
+						</span>
+					</button>
+					<span class="contact-copy-tip" role="status"></span>
+				</div>
+
+				<a
+					href="https://linkedin.com/in/shiaulis/"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="contact-item"
+				>
+					<span class="contact-item-text">
+						<span class="contact-item-label">LinkedIn</span>
+						<span class="contact-item-value">@shiaulis</span>
+					</span>
+					<svg
+						class="contact-item-icon"
+						width="18"
+						height="18"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						aria-hidden="true"
+					>
+						<path d="M14 4h6v6"></path>
+						<path d="M20 4l-9 9"></path>
+						<path d="M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+					</svg>
+				</a>
+
+				<a
+					href="https://github.com/shiaulis"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="contact-item"
+				>
+					<span class="contact-item-text">
+						<span class="contact-item-label">GitHub</span>
+						<span class="contact-item-value">@shiaulis</span>
+					</span>
+					<svg
+						class="contact-item-icon"
+						width="18"
+						height="18"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						aria-hidden="true"
+					>
+						<path d="M14 4h6v6"></path>
+						<path d="M20 4l-9 9"></path>
+						<path d="M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path>
+					</svg>
+				</a>
+			</div>
+		</div>
 	</div>
 </nav>
+
+<script>
+	if (!Object.hasOwn(HTMLElement.prototype, 'popover')) {
+		const script = document.createElement('script');
+		script.src = 'https://unpkg.com/@oddbird/popover-polyfill@latest/dist/popover.min.js';
+		document.head.append(script);
+	}
+
+	const trigger = document.getElementById('contact-trigger') as HTMLButtonElement | null;
+	const popover = document.getElementById('contact-popover') as HTMLElement | null;
+
+	function positionFallback() {
+		if (!trigger || !popover || CSS.supports('position-area', 'block-end')) return;
+		const triggerRect = trigger.getBoundingClientRect();
+		const popRect = popover.getBoundingClientRect();
+		let top = triggerRect.bottom + 8;
+		if (top + popRect.height > window.innerHeight - 8) {
+			top = Math.max(8, triggerRect.top - popRect.height - 8);
+		}
+		const left = Math.max(
+			8,
+			Math.min(triggerRect.right - popRect.width, window.innerWidth - popRect.width - 8)
+		);
+		popover.style.top = `${top}px`;
+		popover.style.left = `${left}px`;
+	}
+
+	if (trigger && popover) {
+		popover.addEventListener('toggle', (event) => {
+			const isOpen = (event as ToggleEvent).newState === 'open';
+			trigger.setAttribute('aria-expanded', String(isOpen));
+			if (isOpen) {
+				positionFallback();
+			}
+		});
+
+		window.addEventListener('resize', () => {
+			if (trigger.getAttribute('aria-expanded') === 'true') {
+				positionFallback();
+			}
+		});
+
+		document.querySelectorAll<HTMLAnchorElement>('a[href="#contact"]').forEach((link) => {
+			link.addEventListener('click', (event) => {
+				event.preventDefault();
+				window.scrollTo({ top: 0, behavior: 'smooth' });
+				if (trigger.getAttribute('aria-expanded') !== 'true') {
+					popover.showPopover?.({ source: trigger } as ShowPopoverOptions);
+				}
+			});
+		});
+	}
+
+	const timers = new WeakMap<HTMLElement, number>();
+	let lastMessage = '';
+
+	function legacyCopy(text: string): boolean {
+		const field = Object.assign(document.createElement('textarea'), { value: text });
+		field.setAttribute('readonly', '');
+		field.style.cssText = 'position:fixed;inset-block-start:0;opacity:0';
+		document.body.append(field);
+		field.select();
+		try {
+			return document.execCommand('copy');
+		} finally {
+			field.remove();
+		}
+	}
+
+	function report(button: HTMLElement, ok: boolean) {
+		const tip = button.nextElementSibling as HTMLElement | null;
+		window.clearTimeout(timers.get(button));
+		button.removeAttribute('data-copied');
+		button.removeAttribute('data-failed');
+		let message = ok ? 'Copied' : 'Copy failed';
+		if (message === lastMessage) message += '\u00A0';
+		lastMessage = message;
+		if (tip) tip.textContent = '';
+		void button.offsetWidth;
+		button.setAttribute(ok ? 'data-copied' : 'data-failed', '');
+		requestAnimationFrame(() => {
+			if (tip) tip.textContent = message;
+		});
+		timers.set(
+			button,
+			window.setTimeout(() => {
+				button.removeAttribute('data-copied');
+				button.removeAttribute('data-failed');
+				if (tip) tip.textContent = '';
+			}, 2000)
+		);
+	}
+
+	async function copy(button: HTMLElement, target: HTMLElement) {
+		const text = target.innerText.trim();
+		if (!text) return;
+		try {
+			await navigator.clipboard.writeText(text);
+			report(button, true);
+		} catch {
+			if (legacyCopy(text)) {
+				report(button, true);
+			} else {
+				report(button, false);
+			}
+		}
+	}
+
+	document.addEventListener(
+		'command',
+		(event: Event) => {
+			const cmdEvent = event as Event & { command?: string; source?: HTMLElement };
+			if (cmdEvent.command?.startsWith('--copy') && cmdEvent.source && cmdEvent.target instanceof HTMLElement) {
+				copy(cmdEvent.source, cmdEvent.target);
+			}
+		},
+		true
+	);
+
+	if (!('CommandEvent' in window)) {
+		document.addEventListener('click', (event) => {
+			const targetEl = event.target as Element | null;
+			const button = targetEl?.closest<HTMLButtonElement>('button[command^="--copy"]');
+			if (!button) return;
+			const copyTargetId = button.getAttribute('commandfor');
+			const copyTarget = copyTargetId ? document.getElementById(copyTargetId) : null;
+			if (copyTarget) copy(button, copyTarget);
+		});
+	}
+</script>

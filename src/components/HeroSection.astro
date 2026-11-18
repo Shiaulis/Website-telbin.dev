@@ -1,37 +1,37 @@
 ---
 import { Image } from 'astro:assets';
-import heroHeadshot from '../assets/hero-headshot.webp';
+import heroSketch from '../assets/hero-sketch.jpg';
 ---
 
 <section class="hero-section">
-	<div class="text">
-		<h1>Hello from Andrius 👋🏾</h1>
-		<p>I'm a Senior iOS Engineer with 9+ years of experience specializing in Swift, UIKit, Core Data, and app architecture. Great apps aren't just functional — they should feel natural, be accessible to everyone, and meet both simple and complex user needs.</p>
-
-		<p>Most recently, I spent 8 years at Pipedrive setting technical direction for a five-person iOS team, modernizing persistence and sync, and shipping features like offline search and PKCE web authentication. Based in Tallinn, I'm currently open to Senior iOS and hands-on Technical Lead roles, locally or remotely.</p>
-
-		<p>Outside of iOS engineering, I enjoy tinkering with web development, productivity tools, touch typing, and content creation. Feel free to look around — happy to connect!</p>
-		<div class="links">
-			<a href="#experience">
-				<i class="fa-solid fa-code"></i>
-				<span>Experience</span>
-			</a>
-			<a href="#contact">
-				<i class="fa-solid fa-envelope"></i>
-				<span>Contact</span>
-			</a>
+	<div class="hero-container">
+		<div class="hero-avatar">
+			<Image
+				src={heroSketch}
+				alt="Andrius Shiaulis pencil sketch portrait"
+				width={240}
+				height={240}
+				densities={[1, 2]}
+				quality={90}
+				loading="eager"
+				fetchpriority="high"
+			/>
 		</div>
-	</div>
-	<div class="headshot">
-		<Image
-			src={heroHeadshot}
-			alt="Andrius Shiaulis - Senior iOS Developer"
-			width={320}
-			height={320}
-			densities={[1, 2]}
-			quality={85}
-			loading="eager"
-			fetchpriority="high"
-		/>
+
+		<p class="hero-greeting">Hi, it's good to meet you, I'm Andrius Shiaulis. I'm a…</p>
+
+		<h1 class="hero-statement">
+			<span class="highlight">Senior Software Engineer</span><br />
+			&amp; <span class="highlight">AI Workflow Advisor</span><br />
+			helping teams and individuals bring practical AI into daily work
+		</h1>
+
+		<p class="hero-sub">11+ years in tech (Pipedrive, Readdle) · Based in Tallinn, Estonia</p>
+
+		<div class="hero-actions">
+			<a href="#how-i-help" class="primary-pill">How I can help ↓</a>
+			<a href="/about/" class="secondary-pill">About &amp; Experience</a>
+			<a href="#contact" class="secondary-pill">Get in touch</a>
+		</div>
 	</div>
 </section>

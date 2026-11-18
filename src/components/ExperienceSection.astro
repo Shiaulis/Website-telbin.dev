@@ -7,35 +7,39 @@ import { experiences } from '../data/experience';
 	<div class="timeline">
 		{experiences.map((exp) => (
 			<div class="experience-group">
-				<h3 class="company-name">{exp.company}</h3>
-				{exp.positions.map((position) => (
-					<div class="position">
-						<div class="position-header">
-							<h4 class="position-title">{position.title}</h4>
-							<span class="position-period">{position.period}</span>
-						</div>
-						{position.location && (
-							<p class="position-location">{position.location}</p>
-						)}
-						{position.description && (
-							<p class="position-description">{position.description}</p>
-						)}
-						{position.highlights && position.highlights.length > 0 && (
-							<ul class="position-highlights">
-								{position.highlights.map((highlight) => (
-									<li>{highlight}</li>
-								))}
-							</ul>
-						)}
-						{position.skills && position.skills.length > 0 && (
-							<div class="position-skills">
-								{position.skills.map((skill) => (
-									<span class="skill-tag">{skill}</span>
-								))}
-							</div>
-						)}
+				<div class="company-header">
+					<h3 class="company-name">{exp.company}</h3>
+					<span class="company-meta">{exp.location} · {exp.period}</span>
+				</div>
+
+				<div class="position">
+					<div class="role-progression">
+						{exp.roles.map((role, index) => (
+							<>
+								{index > 0 && <span class="role-sep" aria-hidden="true">·</span>}
+								<span class="role-item">
+									<strong class="position-title">{role.title}</strong>
+									<span class="position-period">({role.period})</span>
+								</span>
+							</>
+						))}
 					</div>
-				))}
+
+					{exp.description && (
+						<p class="position-description">{exp.description}</p>
+					)}
+
+					{exp.highlights.length > 0 && (
+						<ul class="position-highlights">
+							{exp.highlights.map((highlight) => (
+								<li>
+									{highlight.label && <strong>{highlight.label}: </strong>}
+									{highlight.text}
+								</li>
+							))}
+						</ul>
+					)}
+				</div>
 			</div>
 		))}
 	</div>
