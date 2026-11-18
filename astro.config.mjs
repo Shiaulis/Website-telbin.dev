@@ -7,7 +7,7 @@ export default defineConfig({
 	site: 'https://telbin.dev',
 	integrations: [
 		sitemap({
-			filter: (page) => !/^\/(thanks|404)\/?$/.test(new URL(page).pathname),
+			filter: (page) => !/^\/(thanks|404|ipad-cases)\/?$/.test(new URL(page).pathname),
 		}),
 	],
 });

@@ -1,0 +1,977 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/global.css';
+
+interface StoreLink {
+	label: string;
+	url: string;
+}
+
+interface Candidate {
+	id: string;
+	name: string;
+	tier: 'protective' | 'apple-cover' | 'keyboard';
+	price: string;
+	store: string;
+	reviewProof: string;
+	badge?: string;
+	badgeTone?: 'accent' | 'neutral' | 'apple';
+	image: string;
+	edgeProtection: 'Maximum' | 'Full' | 'Partial (edges exposed)';
+	stand: string;
+	keyboard: string;
+	summary: string;
+	pros: string[];
+	tradeoffs: string[];
+	links: StoreLink[];
+}
+
+const candidates: Candidate[] = [
+	{
+		id: 'spigen-rugged-armor-pro',
+		name: 'Spigen Ultra Hybrid Pro (Clear Back) & Rugged Armor Pro',
+		tier: 'protective',
+		price: '€44.90 – €54.89',
+		store: 'Galador',
+		reviewProof: '★ 4.7 on Amazon (thousands of reviews) · Tom’s Guide & YouTube favorite',
+		badge: 'Top Cover Pick · Best Reviewed on Amazon & YouTube',
+		badgeTone: 'accent',
+		image: 'https://galador.b-cdn.net/media/hv/products/vs/tb/t6ixmaxhtw2b.jpg?v=s3',
+		edgeProtection: 'Full',
+		stand: '2-angle tri-fold stand + magnetic clasp',
+		keyboard: 'No',
+		summary:
+			'The exact Amazon bestseller (Spigen Ultra Hybrid Pro): crystal-clear rigid polycarbonate back, Air Cushion shock-absorbing TPU bumper, built-in Pencil holder, tri-fold stand cover, and a magnetic clasp that keeps the cover shut inside a bag.',
+		pros: [
+			'Exact same Spigen Ultra Hybrid Pro sold on Amazon.de — in stock locally at Galador in Black/Clear (€54.89) and Sky Blue/Clear (€49.00)',
+			'Crystal-clear rigid back shows the iPad finish while Air Cushion corners absorb drops',
+			'Magnetic wrap clasp prevents the front cover from opening inside a work bag',
+			'Also available in all-matte-black TPU (Rugged Armor Pro, €44.90) or slim Smart Fold (€29.90)',
+		],
+		tradeoffs: [
+			'Two fixed tri-fold stand angles rather than a stepless kickstand',
+		],
+		links: [
+			{ label: 'Ultra Hybrid Pro Black/Clear €54.89 (Galador)', url: 'https://www.galador.ee/en/1981-smart-tech-accessories/14316807-kaitsekaaned-ultra-hybrid-pro-apple-ipad-11-2025-a16-ipad-10-9-2022-must-labipaistev-spigen' },
+			{ label: 'Ultra Hybrid Pro Blue/Clear €49.00 (Galador)', url: 'https://www.galador.ee/en/0-product/19752097-kaitsekaaned-ultra-hybrid-pro-apple-ipad-10-9-2022-sinine-labipaistev-spigen' },
+			{ label: 'Rugged Armor Pro Black €44.90 (Galador)', url: 'https://www.galador.ee/en/1981-smart-tech-accessories/14387929-kaitsekaaned-rugged-armor-pro-apple-ipad-11-2025-a16-ipad-10-9-2022-must-spigen' },
+			{ label: 'Slim Smart Fold €29.90 (Galador)', url: 'https://www.galador.ee/en/1981-smart-tech-accessories/14387927-kaitsekaaned-smart-fold-apple-ipad-11-2025-a16-ipad-10-9-2022-must-spigen' },
+		],
+	},
+	{
+		id: 'otterbox-symmetry-flip',
+		name: 'OtterBox Symmetry Series Flip',
+		tier: 'protective',
+		price: '€43.40',
+		store: 'Galador',
+		reviewProof: '★ 4.6 on Amazon · Sold in Apple Stores worldwide',
+		badge: 'Slim Office Pick · Trusted Drop Protection',
+		badgeTone: 'neutral',
+		image: 'https://galador.b-cdn.net/media/hv/products/t/vu/vy4hrugqz4yu.jpg?v=s3',
+		edgeProtection: 'Full',
+		stand: 'Multi-angle folding cover + magnetic latch',
+		keyboard: 'No',
+		summary:
+			'OtterBox’s slim, office-friendly folio in Starry Night (dark charcoal). Pairs a drop-tested perimeter bumper and clear scratch-resistant back with a microfiber-lined folding stand cover.',
+		pros: [
+			'Clean executive look with famous OtterBox drop testing — no bulky tactical look',
+			'Magnetic latch keeps the folio securely closed inside a bag',
+			'Transparent back panel shows the iPad finish and makes organizational asset tags visible',
+		],
+		tradeoffs: [
+			'Only one dark charcoal colorway currently stocked',
+		],
+		links: [
+			{ label: 'Starry Night €43.40 (Galador)', url: 'https://www.galador.ee/en/1046-tablet-cases/17299975-otter-products-otterbox-symmetry-series-flip-hulle-fur-tablet-sternenklare-nacht-fur-apple-10-9-inch-ipad-10-generation-77-95790' },
+		],
+	},
+	{
+		id: 'targus-versavu',
+		name: 'Targus VersaVu 360° / Click-In',
+		tier: 'protective',
+		price: '€39.70 – €47.80',
+		store: 'Galador',
+		reviewProof: '★ 4.6 on Amazon (5,000+ ratings) · MIL-STD-810G 1.2m drop-tested',
+		badge: 'Best for Portrait + Landscape Stand (App Testing)',
+		badgeTone: 'neutral',
+		image: 'https://galador.b-cdn.net/media/hv/products/x/tm/tey2ld5zrm.jpg?v=s3',
+		edgeProtection: 'Full',
+		stand: '360° rotating portrait & landscape grooves',
+		keyboard: 'No',
+		summary:
+			'Corporate and enterprise favorite with military-grade 1.2 m drop protection. VersaVu’s rotating cradle lets the iPad stand vertically (portrait) as well as horizontally (landscape).',
+		pros: [
+			'Stands in both Portrait and Landscape — very handy when testing mobile apps like Ole Valmis in portrait mode',
+			'Deep interior grooves hold multiple stable viewing and typing angles',
+			'MIL-STD-810G drop-tested corners; also available in the slimmer non-rotating Targus Click-In (€47.80)',
+		],
+		tradeoffs: [
+			'Slightly thicker book-style cover due to the 360° rotating mechanism',
+		],
+		links: [
+			{ label: 'VersaVu 360° Black/Clear €39.70 (Galador)', url: 'https://www.galador.ee/en/1046-tablet-cases/17419600-targus-versavu-beskyttelsescover-sort-transparent-apple-10-9-inch-ipad-10-generation-apple-ipad-a16-wi-fi-a16-wi-fi-cellular' },
+			{ label: 'Click-In Black €47.80 (Galador)', url: 'https://www.galador.ee/en/1046-tahvelarvutite-kotid/14013885-targus-click-in-ipad-case-2022-black' },
+		],
+	},
+	{
+		id: 'tucano-satin',
+		name: 'Tucano Satin / Tucano Educo',
+		tier: 'protective',
+		price: '€44.99 – €49.99',
+		store: 'Euronics',
+		reviewProof: 'Italian brand · Best immediate walk-in retail option at Euronics',
+		badge: 'Best Euronics In-Store Option',
+		badgeTone: 'neutral',
+		image: 'https://www.euronics.ee/UserFiles/Products/Images/445686-673593-medium.avif',
+		edgeProtection: 'Full',
+		stand: '2-angle folding cover (viewing & typing)',
+		keyboard: 'No',
+		summary:
+			'Slim satin-finish front cover (Satin) or reinforced black shock-bumper cover (Educo) paired with a TPU perimeter frame and semi-transparent hard back shell.',
+		pros: [
+			'Readily available across Euronics retail stores in Estonia',
+			'Full corner, edge, back, and screen protection with auto wake/sleep',
+			'Satin comes in Grey, Dark Blue, Blue, and Purple; Educo (€49.99) comes in matte Black with extra corner cushioning',
+		],
+		tradeoffs: [
+			'No wrap-around magnetic clasp like Spigen Rugged Armor Pro or OtterBox Symmetry',
+		],
+		links: [
+			{ label: 'Satin Grey €44.99 (Euronics)', url: 'https://www.euronics.ee/en/it/tablets/covers-and-keyboards/ipd1022st-g/tucano-satin-ipad-a16-11th-gen-10-9-10th-gen-grey-cover' },
+			{ label: 'Satin Dark Blue €44.99 (Euronics)', url: 'https://www.euronics.ee/en/it/tablets/covers-and-keyboards/ipd1022st-bbk/tucano-satin-ipad-a16-11th-gen-10-9-10th-gen-dark-blue-cover' },
+			{ label: 'Educo Black €49.99 (Euronics)', url: 'https://www.euronics.ee/en/it/tablets/covers-and-keyboards/ipd1022edup-bk/tucano-educo-ipad-10-9-10th-gen-ipad-a16-11th-gen-black-cover' },
+		],
+	},
+	{
+		id: 'uag-metropolis',
+		name: 'UAG (Urban Armor Gear) Metropolis',
+		tier: 'protective',
+		price: '€59.90',
+		store: 'Galador',
+		reviewProof: '★ 4.7 on Amazon · Heavy-duty MIL-STD-810G 516.6 drop-tested',
+		badge: 'Maximum Rugged Protection',
+		badgeTone: 'neutral',
+		image: 'https://galador.b-cdn.net/media/hv/products/vs/wb/w0lenzmbnq2b.jpg?v=s3',
+		edgeProtection: 'Maximum',
+		stand: 'Multi-angle non-slip kickstand folio',
+		keyboard: 'No',
+		summary:
+			'Heavy-duty impact-resistant folio built for field and travel use, featuring a tactile non-slip exterior, featherlight composite core, and magnetic closure.',
+		pros: [
+			'Highest drop and crush protection if the iPad is ever taken to field exercises or rough travel',
+			'Secure magnetic tab closure and sturdy multi-angle stand',
+		],
+		tradeoffs: [
+			'More rugged tactical styling than Spigen, OtterBox, or Tucano',
+		],
+		links: [
+			{ label: 'Black €59.90 (Galador)', url: 'https://www.galador.ee/en/0-product/14392498-kaitseumbris-kaanega-metropolis-apple-ipad-11-2025-a16-ipad-10-9-2022-must-urban-armor-gear-uag' },
+		],
+	},
+	{
+		id: 'apple-smart-folio',
+		name: 'Apple Smart Folio for iPad (A16)',
+		tier: 'apple-cover',
+		price: '€89.00 – €92.99',
+		store: 'iDeal & Euronics',
+		reviewProof: '★ 4.6 on Amazon · Official Apple magnetic cover',
+		badge: 'Official Apple Cover',
+		badgeTone: 'apple',
+		image: 'https://www.euronics.ee/UserFiles/Products/Images/411434-619169-medium.avif',
+		edgeProtection: 'Partial (edges exposed)',
+		stand: '2-angle magnetic tri-fold',
+		keyboard: 'No',
+		summary:
+			'Apple’s official ultra-slim polyurethane cover that snaps magnetically onto the back of the iPad with no perimeter frame.',
+		pros: [
+			'Thinnest and lightest cover available; effortless magnetic attachment and removal',
+			'First-party Apple materials, fit, and instant wake/sleep integration',
+		],
+		tradeoffs: [
+			'Aluminum sides and corners remain completely exposed against keys or hard objects in a bag',
+			'No black or dark gray option for the A16 iPad (only White, Sky Blue, Watermelon, and Lemonade)',
+			'Twice the price of full-bumper cases from Spigen, OtterBox, or Tucano',
+		],
+		links: [
+			{ label: 'White €89.00 (iDeal)', url: 'https://www.en.shop.cec.ee/apple-ipad-11-a16-smart-folio-white-mdej4zm-a' },
+			{ label: 'White €92.99 (Euronics)', url: 'https://www.euronics.ee/en/it/tablets/covers-and-keyboards/mdej4zmfsa/apple-smart-folio-ipad-a16-white-tablet-case' },
+			{ label: 'Sky Blue €92.99 (Euronics)', url: 'https://www.euronics.ee/en/it/tablets/covers-and-keyboards/mdeq4zmfsa/apple-smart-folio-ipad-a16-sky-tablet-case' },
+			{ label: 'Lemonade €92.99 (Euronics)', url: 'https://www.euronics.ee/en/it/tablets/covers-and-keyboards/mden4zmfsa/apple-smart-folio-ipad-a16-lemonade-tablet-case' },
+		],
+	},
+	{
+		id: 'logitech-combo-touch',
+		name: 'Logitech Combo Touch (or Slim Folio)',
+		tier: 'keyboard',
+		price: '€154.31 – €164.80',
+		store: 'Galador',
+		reviewProof: '★ 4.6 on Amazon (thousands of reviews) · #1 Keyboard Case on Wirecutter, Tom’s Guide & YouTube',
+		badge: 'Top Keyboard Pick · Better Protection & Half the Price of Apple',
+		badgeTone: 'accent',
+		image: 'https://galador.b-cdn.net/media/hv/products/j/ru/rk3f4ewgtfpu.jpg?v=s3',
+		edgeProtection: 'Full',
+		stand: '50° stepless rear kickstand',
+		keyboard: 'Yes (Smart Connector, backlit + large trackpad)',
+		summary:
+			'Universally ranked by tech reviewers as the best keyboard case for the iPad 10th gen / A16. Uses Apple’s Smart Connector (no battery or Bluetooth pairing needed), has a detachable backlit keyboard and precision trackpad, and wraps the iPad in a protective bumper case.',
+		pros: [
+			'Powered directly via the Apple Smart Connector — zero pairing and never needs charging',
+			'Protects all 4 corners and aluminum edges inside a bag (unlike Apple’s Magic Keyboard Folio)',
+			'Practical Oxford Grey woven fabric stays clean (unlike Apple’s white-only keyboard)',
+			'Half the price of Apple’s Magic Keyboard Folio (€154.31 Nordic / €164.80 US vs. €300+); or choose the non-trackpad Logitech Slim Folio for €106.00',
+		],
+		tradeoffs: [
+			'Adds slightly more thickness and weight than a simple non-keyboard folio',
+		],
+		links: [
+			{ label: 'Combo Touch Nordic €154.31 (Galador)', url: 'https://www.galador.ee/en/1965-tablet-keyboards/17956734-log-logitech-combo-touch-tastatur-og-folio-kasse-16-niveau-kablet-nordisk-dansk-finsk-norsk-svensk' },
+			{ label: 'Combo Touch US €164.80 (Galador)', url: 'https://www.galador.ee/en/1252-keyboards/17651227-log-lgn-logitech-combo-touch-ipad-2022-grey-us-layout' },
+			{ label: 'Slim Folio (no trackpad) Nordic €106.00 (Galador)', url: 'https://www.galador.ee/en/1965-tablet-keyboards/16819840-log-logitech-slim-folio-tastatur-og-folio-kasse-saks-tradlos-nordisk-dansk-finsk-norsk-svensk' },
+		],
+	},
+	{
+		id: 'apple-magic-keyboard-folio',
+		name: 'Apple Magic Keyboard Folio',
+		tier: 'keyboard',
+		price: '€299.99 – €309.99',
+		store: 'Euronics & iDeal',
+		reviewProof: '★ 4.6 on Amazon · Official Apple 2-piece keyboard folio',
+		badge: 'Official Apple Keyboard Folio',
+		badgeTone: 'apple',
+		image: 'https://www.euronics.ee/UserFiles/Products/Images/334153-502326-medium.avif',
+		edgeProtection: 'Partial (edges exposed)',
+		stand: 'Stepless magnetic kickstand',
+		keyboard: 'Yes (Smart Connector + trackpad)',
+		summary:
+			'Apple’s official two-piece magnetic case with a detachable full-size keyboard, click-anywhere trackpad, 14-key function row, and adjustable kickstand.',
+		pros: [
+			'Powered directly by the iPad Smart Connector — zero pairing and never needs charging',
+			'Crisp Apple scissor-switch typing feel and click-anywhere haptic trackpad',
+			'Available in both Swedish/Nordic (SWE) and International English (ENG)',
+		],
+		tradeoffs: [
+			'Nearly twice the price of the Logitech Combo Touch (€300 vs. €154)',
+			'Only manufactured in White, lacks key backlighting, and leaves the metal perimeter edges exposed in a bag',
+		],
+		links: [
+			{ label: 'SWE/Nordic €299.99 (Euronics)', url: 'https://www.euronics.ee/en/it/tablets/covers-and-keyboards/mqdp3sfsa/apple-magic-keyboard-folio-for-ipad-10-swe-white-tablet-cover-with-keyboard' },
+			{ label: 'INT English €309.99 (Euronics)', url: 'https://www.euronics.ee/en/it/tablets/covers-and-keyboards/mqdp3zfsa/apple-magic-keyboard-folio-for-ipad-10-eng-white-tablet-cover-with-keyboard' },
+			{ label: 'INT English €309.00 (iDeal)', url: 'https://www.en.shop.cec.ee/apple-ipad-10-9-magic-keyboard-folio-int-l-english-mqdp3z-a' },
+		],
+	},
+];
+
+const protectiveTier = candidates.filter((c) => c.tier === 'protective');
+const appleCoverTier = candidates.filter((c) => c.tier === 'apple-cover');
+const keyboardTier = candidates.filter((c) => c.tier === 'keyboard');
+---
+
+<BaseLayout
+	title="iPad 11-inch (A16) Case & Cover Options"
+	description="Curated comparison of top-reviewed protective covers, official Apple folios, and keyboard cases for the iPad 11-inch (A16) from Estonian stores."
+	noindex={true}
+>
+	<main class="guide-page">
+		<header class="guide-header">
+			<div class="guide-meta">
+				<span class="guide-pill">Prepared for Elisa & Airi</span>
+				<span class="guide-date">Prices & stock checked: Nov 18, 2026</span>
+			</div>
+			<h1>iPad 11-inch (A16) Case & Cover Options</h1>
+			<p class="guide-lead">
+				Shortlist of the best-reviewed iPad cases on <strong>Amazon</strong> and <strong>YouTube</strong> that are currently in stock at well-known Estonian stores (<strong>Galador</strong>, <strong>Euronics</strong>, and <strong>iDeal / C&amp;C</strong>) for the
+				<a href="https://www.apple.com/ee/ipad-11/" target="_blank" rel="noopener noreferrer">Apple iPad 11-inch (A16)</a>.
+			</p>
+			<div class="compat-banner">
+				<i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+				<div>
+					<strong>Compatibility note:</strong> The iPad 11-inch (A16) uses the exact same body dimensions (<code>248.6 × 179.5 × 7 mm</code>), camera cutout, and Smart Connector as the <strong>iPad 10th generation (10.9")</strong>. Cases labeled for either model fit identically. <em>(Do not order cases made only for iPad Air 11", which is slightly smaller and uses a different Smart Connector placement.)</em>
+				</div>
+			</div>
+		</header>
+
+		<section class="quick-picks" aria-labelledby="quick-picks-heading">
+			<h2 id="quick-picks-heading">Top Picks by Category</h2>
+			<div class="picks-grid">
+				<a href="#spigen-rugged-armor-pro" class="pick-card pick-card-primary">
+					<span class="pick-tier">1 · Best Protective Cover (Amazon/YouTube #1)</span>
+					<h3>Spigen Rugged Armor Pro / OtterBox</h3>
+					<p class="pick-price">€43.40 – €54.89 · Galador</p>
+					<p>Thousands of 4.7★ Amazon reviews. Protects corners, edges, back, and screen with a <strong>magnetic latch</strong> that keeps the cover shut inside a work bag.</p>
+				</a>
+				<a href="#logitech-combo-touch" class="pick-card pick-card-primary">
+					<span class="pick-tier">2 · Best Keyboard &amp; Trackpad Case</span>
+					<h3>Logitech Combo Touch</h3>
+					<p class="pick-price">€154.31 (Nordic) / €164.80 (US) · Galador</p>
+					<p>Ranked #1 by Wirecutter &amp; YouTube reviewers: uses Apple’s battery-free Smart Connector, has a detachable backlit keyboard + trackpad, protects all 4 corners, and costs <strong>half as much</strong> as Apple’s keyboard.</p>
+				</a>
+				<a href="#apple-smart-folio" class="pick-card">
+					<span class="pick-tier">3 · Official Apple Options</span>
+					<h3>Apple Smart Folio / Magic Keyboard</h3>
+					<p class="pick-price">€89.00 or €299.99 · iDeal / Euronics</p>
+					<p>Thinnest magnetic attachment directly from Apple, with the caveat that the aluminum sides remain exposed in a bag and only light/white colors exist.</p>
+				</a>
+			</div>
+		</section>
+
+		<nav class="tier-nav" aria-label="Jump to section">
+			<a href="#tier-protective">Tier 1: Protective Folios (€30–€60)</a>
+			<a href="#tier-apple">Tier 2: Official Apple Folio (€89–€93)</a>
+			<a href="#tier-keyboard">Tier 3: Keyboard Cases (€106–€310)</a>
+			<a href="#comparison-table">Comparison Table</a>
+		</nav>
+
+		<section id="tier-protective" class="tier-section">
+			<div class="tier-header">
+				<h2>Tier 1: Top-Reviewed Protective Folios with Stand (€30 – €60)</h2>
+				<p>Full bumper protection around the corners and edges for safe carrying in a bag, plus a front cover that folds into a stand.</p>
+			</div>
+			<div class="candidate-grid">
+				{protectiveTier.map((item) => (
+					<article id={item.id} class="candidate-card">
+						<div class="candidate-image-wrap">
+							{item.badge && (
+								<span class={`candidate-badge badge-${item.badgeTone ?? 'neutral'}`}>{item.badge}</span>
+							)}
+							<img src={item.image} alt={item.name} loading="lazy" referrerpolicy="no-referrer" />
+						</div>
+						<div class="candidate-body">
+							<div class="candidate-title-row">
+								<div>
+									<h3>{item.name}</h3>
+									<span class="candidate-review-proof">{item.reviewProof}</span>
+								</div>
+								<div class="candidate-price-block">
+									<span class="candidate-price">{item.price}</span>
+									<span class="candidate-store">{item.store}</span>
+								</div>
+							</div>
+							<p class="candidate-summary">{item.summary}</p>
+							<dl class="candidate-specs">
+								<div>
+									<dt>Bag &amp; Edge Protection</dt>
+									<dd>{item.edgeProtection}</dd>
+								</div>
+								<div>
+									<dt>Stand</dt>
+									<dd>{item.stand}</dd>
+								</div>
+							</dl>
+							<div class="candidate-lists">
+								<div class="pros-block">
+									<h4>Why consider it</h4>
+									<ul>
+										{item.pros.map((p) => <li>{p}</li>)}
+									</ul>
+								</div>
+								<div class="cons-block">
+									<h4>Trade-off</h4>
+									<ul>
+										{item.tradeoffs.map((t) => <li>{t}</li>)}
+									</ul>
+								</div>
+							</div>
+							<div class="candidate-links">
+								{item.links.map((link) => (
+									<a href={link.url} target="_blank" rel="noopener noreferrer" class="store-btn">
+										<span>{link.label}</span>
+										<i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+									</a>
+								))}
+							</div>
+						</div>
+					</article>
+				))}
+			</div>
+		</section>
+
+		<section id="tier-apple" class="tier-section">
+			<div class="tier-header">
+				<h2>Tier 2: Official Apple Folio Cover (€89 – €93)</h2>
+				<p>First-party magnetic cover that attaches directly to the back of the iPad with zero extra frame thickness.</p>
+			</div>
+			<div class="candidate-grid">
+				{appleCoverTier.map((item) => (
+					<article id={item.id} class="candidate-card">
+						<div class="candidate-image-wrap">
+							{item.badge && (
+								<span class={`candidate-badge badge-${item.badgeTone ?? 'neutral'}`}>{item.badge}</span>
+							)}
+							<img src={item.image} alt={item.name} loading="lazy" referrerpolicy="no-referrer" />
+						</div>
+						<div class="candidate-body">
+							<div class="candidate-title-row">
+								<div>
+									<h3>{item.name}</h3>
+									<span class="candidate-review-proof">{item.reviewProof}</span>
+								</div>
+								<div class="candidate-price-block">
+									<span class="candidate-price">{item.price}</span>
+									<span class="candidate-store">{item.store}</span>
+								</div>
+							</div>
+							<p class="candidate-summary">{item.summary}</p>
+							<dl class="candidate-specs">
+								<div>
+									<dt>Bag &amp; Edge Protection</dt>
+									<dd>{item.edgeProtection}</dd>
+								</div>
+								<div>
+									<dt>Stand</dt>
+									<dd>{item.stand}</dd>
+								</div>
+							</dl>
+							<div class="candidate-lists">
+								<div class="pros-block">
+									<h4>Why consider it</h4>
+									<ul>
+										{item.pros.map((p) => <li>{p}</li>)}
+									</ul>
+								</div>
+								<div class="cons-block">
+									<h4>Trade-offs</h4>
+									<ul>
+										{item.tradeoffs.map((t) => <li>{t}</li>)}
+									</ul>
+								</div>
+							</div>
+							<div class="candidate-links">
+								{item.links.map((link) => (
+									<a href={link.url} target="_blank" rel="noopener noreferrer" class="store-btn">
+										<span>{link.label}</span>
+										<i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+									</a>
+								))}
+							</div>
+						</div>
+					</article>
+				))}
+			</div>
+		</section>
+
+		<section id="tier-keyboard" class="tier-section">
+			<div class="tier-header">
+				<h2>Tier 3: Keyboard &amp; Trackpad Cases (€106 – €310)</h2>
+				<p>Best if the iPads will frequently be used for writing emails or documents at a desk without an external keyboard.</p>
+			</div>
+			<div class="candidate-grid">
+				{keyboardTier.map((item) => (
+					<article id={item.id} class="candidate-card">
+						<div class="candidate-image-wrap">
+							{item.badge && (
+								<span class={`candidate-badge badge-${item.badgeTone ?? 'neutral'}`}>{item.badge}</span>
+							)}
+							<img src={item.image} alt={item.name} loading="lazy" referrerpolicy="no-referrer" />
+						</div>
+						<div class="candidate-body">
+							<div class="candidate-title-row">
+								<div>
+									<h3>{item.name}</h3>
+									<span class="candidate-review-proof">{item.reviewProof}</span>
+								</div>
+								<div class="candidate-price-block">
+									<span class="candidate-price">{item.price}</span>
+									<span class="candidate-store">{item.store}</span>
+								</div>
+							</div>
+							<p class="candidate-summary">{item.summary}</p>
+							<dl class="candidate-specs">
+								<div>
+									<dt>Bag &amp; Edge Protection</dt>
+									<dd>{item.edgeProtection}</dd>
+								</div>
+								<div>
+									<dt>Stand &amp; Input</dt>
+									<dd>{item.stand} · {item.keyboard}</dd>
+								</div>
+							</dl>
+							<div class="candidate-lists">
+								<div class="pros-block">
+									<h4>Why consider it</h4>
+									<ul>
+										{item.pros.map((p) => <li>{p}</li>)}
+									</ul>
+								</div>
+								<div class="cons-block">
+									<h4>Trade-offs</h4>
+									<ul>
+										{item.tradeoffs.map((t) => <li>{t}</li>)}
+									</ul>
+								</div>
+							</div>
+							<div class="candidate-links">
+								{item.links.map((link) => (
+									<a href={link.url} target="_blank" rel="noopener noreferrer" class="store-btn">
+										<span>{link.label}</span>
+										<i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+									</a>
+								))}
+							</div>
+						</div>
+					</article>
+				))}
+			</div>
+		</section>
+
+		<section id="comparison-table" class="comparison-section">
+			<h2>Side-by-Side Summary</h2>
+			<div class="table-scroll">
+				<table>
+					<thead>
+						<tr>
+							<th>Option</th>
+							<th>Price</th>
+							<th>Store</th>
+							<th>Reviews</th>
+							<th>Edge &amp; Corner Protection</th>
+							<th>Stand Type</th>
+							<th>Keyboard &amp; Trackpad</th>
+						</tr>
+					</thead>
+					<tbody>
+						{candidates.map((c) => (
+							<tr>
+								<td><a href={`#${c.id}`}><strong>{c.name}</strong></a></td>
+								<td class="td-mono">{c.price}</td>
+								<td>{c.store}</td>
+								<td>{c.reviewProof}</td>
+								<td>{c.edgeProtection}</td>
+								<td>{c.stand}</td>
+								<td>{c.keyboard}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
+		</section>
+	</main>
+</BaseLayout>
+
+<style>
+	.guide-page {
+		padding: 48px 24px 80px;
+		max-width: 1080px;
+		margin: 0 auto;
+	}
+
+	.guide-header {
+		margin-bottom: 40px;
+	}
+
+	.guide-meta {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 12px;
+		margin-bottom: 14px;
+		font-size: 13px;
+		color: var(--muted-text-color);
+	}
+
+	.guide-pill {
+		background: var(--surface-color);
+		border: 1px solid var(--border-color);
+		color: var(--text-color);
+		font-weight: 600;
+		padding: 4px 10px;
+		border-radius: 999px;
+	}
+
+	.guide-header h1 {
+		font-size: clamp(28px, 4vw, 40px);
+		line-height: 1.15;
+		margin-bottom: 14px;
+	}
+
+	.guide-lead {
+		font-size: 17px;
+		line-height: 1.6;
+		color: var(--muted-text-color);
+		max-width: 780px;
+		margin-bottom: 20px;
+	}
+
+	.guide-lead a {
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+
+	.compat-banner {
+		display: flex;
+		align-items: flex-start;
+		gap: 12px;
+		background: var(--surface-color);
+		border: 1px solid var(--border-color);
+		border-left: 4px solid var(--brand-accent);
+		padding: 14px 16px;
+		border-radius: 10px;
+		font-size: 14px;
+		line-height: 1.55;
+	}
+
+	.compat-banner i {
+		color: var(--brand-accent);
+		margin-top: 3px;
+		font-size: 16px;
+	}
+
+	.compat-banner code {
+		font-family: var(--font-mono);
+		font-size: 13px;
+	}
+
+	.quick-picks {
+		margin-bottom: 32px;
+	}
+
+	.quick-picks h2 {
+		font-size: 20px;
+		margin-bottom: 16px;
+	}
+
+	.picks-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 16px;
+	}
+
+	.pick-card {
+		display: block;
+		background: var(--surface-color);
+		border: 1px solid var(--border-color);
+		border-radius: 14px;
+		padding: 20px;
+		color: var(--text-color);
+		transition: transform 0.15s ease, border-color 0.15s ease;
+	}
+
+	.pick-card:hover {
+		transform: translateY(-2px);
+		border-color: var(--brand-accent);
+	}
+
+	.pick-card-primary {
+		border-width: 2px;
+		border-color: var(--brand-accent);
+	}
+
+	.pick-tier {
+		display: inline-block;
+		font-size: 12px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		color: var(--brand-accent);
+		margin-bottom: 6px;
+	}
+
+	.pick-card h3 {
+		font-size: 19px;
+		margin-bottom: 4px;
+	}
+
+	.pick-price {
+		font-family: var(--font-mono);
+		font-size: 13px;
+		color: var(--muted-text-color);
+		margin-bottom: 10px;
+	}
+
+	.pick-card p:last-child {
+		font-size: 14px;
+		line-height: 1.5;
+		color: var(--text-color);
+	}
+
+	.tier-nav {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		margin-bottom: 40px;
+		padding-bottom: 20px;
+		border-bottom: 1px solid var(--border-color);
+	}
+
+	.tier-nav a {
+		background: var(--surface-color);
+		border: 1px solid var(--border-color);
+		color: var(--text-color);
+		font-size: 14px;
+		font-weight: 600;
+		padding: 8px 14px;
+		border-radius: 8px;
+		transition: border-color 0.15s ease, color 0.15s ease;
+	}
+
+	.tier-nav a:hover {
+		border-color: var(--brand-accent);
+		color: var(--brand-accent);
+	}
+
+	.tier-section {
+		margin-bottom: 52px;
+	}
+
+	.tier-header {
+		margin-bottom: 20px;
+	}
+
+	.tier-header h2 {
+		font-size: 24px;
+		margin-bottom: 6px;
+	}
+
+	.tier-header p {
+		font-size: 15px;
+		color: var(--muted-text-color);
+	}
+
+	.candidate-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 24px;
+	}
+
+	.candidate-card {
+		display: grid;
+		grid-template-columns: 260px 1fr;
+		background: var(--surface-color);
+		border: 1px solid var(--border-color);
+		border-radius: 16px;
+		overflow: hidden;
+	}
+
+	.candidate-image-wrap {
+		position: relative;
+		background: #ffffff;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 36px 24px 24px;
+		border-right: 1px solid var(--border-color);
+	}
+
+	.candidate-image-wrap img {
+		max-width: 100%;
+		max-height: 220px;
+		object-fit: contain;
+	}
+
+	.candidate-badge {
+		position: absolute;
+		top: 12px;
+		left: 12px;
+		right: 12px;
+		text-align: center;
+		font-size: 11px;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		padding: 5px 10px;
+		border-radius: 999px;
+	}
+
+	.badge-accent {
+		background: #4D6B1A;
+		color: #ffffff;
+	}
+
+	.badge-neutral {
+		background: #1A1C20;
+		color: #EEEFF1;
+	}
+
+	.badge-apple {
+		background: #2c2f36;
+		color: #ffffff;
+	}
+
+	.candidate-body {
+		padding: 24px;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	.candidate-title-row {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		gap: 16px;
+		flex-wrap: wrap;
+	}
+
+	.candidate-title-row h3 {
+		font-size: 22px;
+		margin-bottom: 4px;
+	}
+
+	.candidate-review-proof {
+		display: inline-block;
+		font-size: 13px;
+		font-weight: 600;
+		color: var(--brand-accent);
+	}
+
+	.candidate-price-block {
+		text-align: right;
+	}
+
+	.candidate-price {
+		display: block;
+		font-family: var(--font-mono);
+		font-size: 18px;
+		font-weight: 700;
+		color: var(--brand-accent);
+	}
+
+	.candidate-store {
+		display: block;
+		font-size: 12px;
+		color: var(--muted-text-color);
+	}
+
+	.candidate-summary {
+		font-size: 15px;
+		line-height: 1.55;
+	}
+
+	.candidate-specs {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 12px;
+		background: var(--background-color);
+		border: 1px solid var(--border-color);
+		border-radius: 10px;
+		padding: 12px 14px;
+	}
+
+	.candidate-specs dt {
+		font-size: 11px;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		color: var(--muted-text-color);
+		margin-bottom: 2px;
+	}
+
+	.candidate-specs dd {
+		font-size: 14px;
+		font-weight: 600;
+	}
+
+	.candidate-lists {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: 16px;
+	}
+
+	.candidate-lists h4 {
+		font-size: 13px;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		margin-bottom: 6px;
+		color: var(--muted-text-color);
+	}
+
+	.candidate-lists ul {
+		padding-left: 18px;
+		font-size: 14px;
+		line-height: 1.5;
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	.candidate-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		margin-top: auto;
+		padding-top: 6px;
+	}
+
+	.store-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		background: var(--background-color);
+		border: 1px solid var(--border-color);
+		color: var(--text-color);
+		font-size: 13px;
+		font-weight: 600;
+		padding: 8px 14px;
+		border-radius: 8px;
+		transition: border-color 0.15s ease, color 0.15s ease;
+	}
+
+	.store-btn:hover {
+		border-color: var(--brand-accent);
+		color: var(--brand-accent);
+	}
+
+	.store-btn i {
+		font-size: 11px;
+	}
+
+	.comparison-section h2 {
+		font-size: 24px;
+		margin-bottom: 16px;
+	}
+
+	.table-scroll {
+		overflow-x: auto;
+		background: var(--surface-color);
+		border: 1px solid var(--border-color);
+		border-radius: 14px;
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 14px;
+		text-align: left;
+	}
+
+	th, td {
+		padding: 13px 16px;
+		border-bottom: 1px solid var(--border-color);
+	}
+
+	th {
+		font-size: 12px;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		color: var(--muted-text-color);
+		background: var(--background-color);
+	}
+
+	tr:last-child td {
+		border-bottom: none;
+	}
+
+	.td-mono {
+		font-family: var(--font-mono);
+		white-space: nowrap;
+	}
+
+	@media (max-width: 760px) {
+		.candidate-card {
+			grid-template-columns: 1fr;
+		}
+
+		.candidate-image-wrap {
+			border-right: none;
+			border-bottom: 1px solid var(--border-color);
+			padding: 40px 20px 20px;
+		}
+
+		.candidate-title-row {
+			flex-direction: column;
+			gap: 4px;
+		}
+
+		.candidate-price-block {
+			text-align: left;
+		}
+	}
+</style>
