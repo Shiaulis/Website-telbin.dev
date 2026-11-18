@@ -10,5 +10,7 @@ reviews:
     drafts: false
     base_branches:
       - master
+  auto_approvals:
+    enabled: true
 chat:
   auto_reply: true
