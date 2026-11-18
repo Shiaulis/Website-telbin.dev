@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 256 256" role="img" aria-labelledby="title">
   <title id="title">Waypoint, dark mode</title>
-  <path fill="#EEEFF1" d="M29 57H179V98H126V211H84V98H29Z"/>
-  <circle fill="#FF986E" cx="211" cy="77.5" r="20.5"/>
+  <path fill="#EEEFF1" d="M24 48H176V92H122V208H78V92H24Z"/>
+  <circle fill="#FF986E" cx="212" cy="70" r="20"/>
 </svg>

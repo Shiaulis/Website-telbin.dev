@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">Waypoint, adaptive favicon</title>
+  <style>
+    .t { fill: #1A1C20; }
+    .dot { fill: #B14A2D; }
+    @media (prefers-color-scheme: dark) {
+      .t { fill: #EEEFF1; }
+      .dot { fill: #FF986E; }
+    }
+  </style>
+  <path class="t" d="M24 48H176V92H122V208H78V92H24Z"/>
+  <circle class="dot" cx="212" cy="70" r="20"/>
+</svg>
