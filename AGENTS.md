@@ -2,7 +2,7 @@
 
 ## Project overview
 
-Personal portfolio website for Andrius Shiaulis, an iOS developer. Built with Astro 7.4.7 and deployed automatically via GitHub Actions to Hostinger FTP.
+Personal portfolio website for Andrius Shiaulis, a Senior Software Engineer & AI Workflow Advisor. Built with Astro 7.4.7 and deployed automatically via GitHub Actions to Hostinger FTP.
 
 ## Communication
 
@@ -26,21 +26,26 @@ Component-based portfolio with a blog:
 
 ```text
 src/
+├── assets/
+│   ├── hero-sketch.jpg           - Hero portrait sketch
+│   └── og-banner.png             - Default 1200x630 Open Graph / Twitter preview banner
 ├── components/
-│   ├── Navigation.astro         - Top navigation bar with social links
+│   ├── Navigation.astro          - Top navigation bar with contact popover
 │   ├── Footer.astro              - Footer with copyright year
-│   ├── HeroSection.astro         - Hero section with bio and headshot
+│   ├── HeroSection.astro         - Hero section with bio and sketch portrait
+│   ├── HowIHelpSection.astro     - Services and advisory capabilities section
 │   ├── ExperienceSection.astro   - Experience timeline (uses data/experience.ts)
 │   └── ContactSection.astro      - Contact form section
 ├── content.config.ts             - Content Collections configuration
 ├── content/
 │   └── blog/                     - Blog posts (Markdown)
 ├── data/
-│   └── experience.ts             - Professional experience data
+│   └── experience.ts             - Professional experience and competencies data
 ├── layouts/
 │   └── BaseLayout.astro          - Base HTML structure with meta tags, SEO
 ├── pages/
-│   ├── index.astro               - Main page (composes all components)
+│   ├── index.astro               - Main page (Hero + How I Help)
+│   ├── about.astro               - About page (bio, competencies, experience timeline)
 │   ├── 404.astro                 - Custom 404 error page
 │   ├── thanks.astro              - Contact form confirmation page
 │   └── blog/
@@ -50,8 +55,9 @@ src/
     └── global.css                - All styles including dark mode support
 
 public/
-├── images/                       - Images (headshot, etc.)
-└── favicon.svg
+├── .htaccess                     - Custom 404 routing
+├── robots.txt                    - Crawler directives
+└── favicon.svg                   - Adaptive Waypoint favicon
 ```
 
 To add a section, create a component in `src/components/` and import it in `src/pages/index.astro`.

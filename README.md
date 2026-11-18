@@ -14,12 +14,13 @@ npm run preview      # Preview the production build locally
 
 ## Structure
 
-- `src/pages/` — Main portfolio (`/`), contact confirmation (`/thanks/`), and blog routes (`/blog/`, `/blog/<slug>/`)
-- `src/components/` — Page sections, navigation, and footer
+- `src/pages/` — Main portfolio (`/`), about & experience (`/about/`), contact confirmation (`/thanks/`), and blog routes (`/blog/`, `/blog/<slug>/`)
+- `src/components/` — Page sections (`HeroSection`, `HowIHelpSection`, `ExperienceSection`), navigation, and footer
 - `src/layouts/BaseLayout.astro` — Shared HTML shell, SEO, and Open Graph / Twitter metadata
-- `src/data/experience.ts` — Work experience timeline data
+- `src/data/experience.ts` — Work experience timeline and core competencies data
 - `src/content/blog/` — Markdown blog posts (configured in `src/content.config.ts`)
-- `public/` — Static assets served as-is (`favicon.svg`, `images/`)
+- `src/assets/` — Optimized images (`hero-sketch.jpg`, `og-banner.png`)
+- `public/` — Static assets served as-is (`favicon.svg`, `robots.txt`, `.htaccess`)
 
 ## Deployment
 

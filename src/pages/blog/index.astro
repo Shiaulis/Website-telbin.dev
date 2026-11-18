@@ -11,13 +11,13 @@ const posts = (await getCollection('blog', ({ data }) => import.meta.env.DEV || 
 
 <BaseLayout
 	title="Blog | Andrius Shiaulis"
-	description="Thoughts on iOS development, Swift, and software engineering"
+	description="Thoughts on AI workflows, software architecture, and practical engineering"
 >
 	<Navigation />
 	<main>
 		<section class="blog-section">
 			<h1>Blog</h1>
-			<p class="blog-intro">Thoughts on iOS development, Swift, and software engineering</p>
+			<p class="blog-intro">Thoughts on AI workflows, software architecture, and practical engineering</p>
 
 			<div class="blog-posts">
 				{posts.map((post) => (
