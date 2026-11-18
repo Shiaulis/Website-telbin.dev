@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="368" viewBox="0 0 840 368" role="img" aria-labelledby="title">
+  <title id="title">telbin.dev logo usage examples</title>
+  <defs>
+    <pattern id="banner-grid" width="16" height="16" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r=".7" fill="#1A1C20" opacity=".13"/>
+    </pattern>
+    <symbol id="waypoint" viewBox="0 0 256 256">
+      <path fill="currentColor" d="M29 57H179V98H126V211H84V98H29Z"/>
+      <circle cx="211" cy="77.5" r="20.5"/>
+    </symbol>
+  </defs>
+  <rect width="840" height="368" rx="16" fill="#FFF"/>
+  <g font-family="Helvetica, Arial, sans-serif">
+    <g fill="#1A1C20" font-size="16" font-weight="700">
+      <text x="24" y="39">Website header</text>
+      <text x="568" y="39">Browser tab · 16 px</text>
+      <text x="24" y="167">LinkedIn banner mockup</text>
+    </g>
+    <rect x="24" y="52" width="252" height="76" rx="10" fill="#EEEFF1"/>
+    <rect x="288" y="52" width="252" height="76" rx="10" fill="#1A1C20"/>
+    <g font-size="24" font-weight="700">
+      <text x="44" y="99" fill="#1A1C20">telbin<tspan fill="#B14A2D">.</tspan>dev</text>
+      <text x="308" y="99" fill="#EEEFF1">telbin<tspan fill="#FF986E">.</tspan>dev</text>
+    </g>
+    <rect x="568" y="52" width="248" height="76" rx="10" fill="#1A1C20"/>
+    <rect x="580" y="74" width="172" height="32" rx="8" fill="#EEEFF1"/>
+    <use href="#waypoint" x="591" y="82" width="16" height="16" color="#1A1C20" fill="#B14A2D"/>
+    <text x="615" y="95" fill="#1A1C20" font-size="13">telbin.dev</text>
+    <rect x="24" y="180" width="792" height="164" rx="10" fill="#EEEFF1"/>
+    <rect x="24" y="180" width="792" height="164" rx="10" fill="url(#banner-grid)"/>
+    <text x="306" y="246" fill="#1A1C20" font-size="23" font-weight="700">
+      <tspan x="306">Helping people &amp; teams bring AI into</tspan>
+      <tspan x="306" dy="28">everyday work.</tspan>
+    </text>
+    <path d="M306 289H758" stroke="#B14A2D" stroke-opacity=".28"/>
+    <use href="#waypoint" x="303" y="297" width="24" height="24" color="#1A1C20" fill="#B14A2D"/>
+    <text x="336" y="316" fill="#1A1C20" font-size="16" font-weight="700">telbin.dev</text>
+  </g>
+</svg>
