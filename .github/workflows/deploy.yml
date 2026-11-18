@@ -5,6 +5,13 @@ on:
     branches:
       - master  # Run this workflow on master branch updates
 
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-master
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest

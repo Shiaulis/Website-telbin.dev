@@ -34,8 +34,7 @@ src/
 │   ├── Footer.astro              - Footer with copyright year
 │   ├── HeroSection.astro         - Hero section with bio and sketch portrait
 │   ├── HowIHelpSection.astro     - Services and advisory capabilities section
-│   ├── ExperienceSection.astro   - Experience timeline (uses data/experience.ts)
-│   └── ContactSection.astro      - Contact form section
+│   └── ExperienceSection.astro   - Experience timeline (uses data/experience.ts)
 ├── content.config.ts             - Content Collections configuration
 ├── content/
 │   └── blog/                     - Blog posts (Markdown)
