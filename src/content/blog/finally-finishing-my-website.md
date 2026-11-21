@@ -2,24 +2,23 @@
 title: "Finally finishing my website: what AI changed for me"
 description: "How AI coding agents turned years of unfinished personal website attempts into a real product—and shifted how I think about my next career step."
 pubDate: 2026-11-20
-tags: ["ai", "website", "career"]
 ---
 
 ## Years of false starts
 
-Before the era of AI, I attempted many times to make a website for myself. WordPress, site builders, even writing HTML and CSS by hand: every time, I hit two walls. First, as a mobile developer, I constantly had to pick up a whole extra layer of knowledge outside my main focus just to make the site decent. Second, I never felt I critically needed one. My experiments with social media also convinced me there was no demand for my writing, so it felt like wasted effort. Impostor syndrome was often my biggest companion in those journeys.
+Before the era of AI, I attempted to make a website for myself many times. WordPress, site builders, even writing HTML and CSS by hand: every time, I hit two walls. First, as a mobile developer, I constantly had to pick up a whole extra layer of knowledge outside of my main focus just to make the site decent. Second, I never felt I critically needed one. My experiments with social media also convinced me there was no demand for my writing, so it felt like wasted effort. Imposter syndrome was often my biggest companion in those journeys.
 
-In 2025, that started to change. AI was on the rise, and I thought it would finally be easy to build a site with prompts like "make personal website, no mistakes." Yet it still took me a month of tinkering and figuring out which platform to use, how to reuse elements, and where to host it.
+In the beginning of 2025, that started to change. AI was on the rise, and I thought it would finally be easy to build a site with prompts like "make personal website, no mistakes". Yet it still took me a month of tinkering and figuring out which platform to use, how to reuse elements, and where to host it.
 
 Eventually, I landed on Astro and Hostinger. I won't go into much detail on why I chose them, but at the time it was a good fit given my close-to-zero knowledge of modern web development. I got a basic version live, and then I didn't touch it for half a year.
 
 ## Trying a coding agent in a field I didn't know yet
 
-In October, I came back to my website. This time I tried bringing a coding agent (Claude Code) into the process. Before that, even basic things like keeping the same header across multiple pages had me stuck.
+In October same year, I came back to my website. This time I tried bringing a coding agent (Claude Code) into the process. Before that, even basic things like keeping the same header across multiple pages had me stuck.
 
 In one evening, I went from a simple starter page to a more sophisticated site with my career timeline and a working blog. Whenever something felt over-complicated, I tried to simplify it until it felt clean. I also asked AI to explain some of the most complex ideas in simpler language, so I could learn along the way.
 
-For the first time, I was applying my engineering judgment to web development and seeing real visual results in minutes instead of weeks. I was pretty happy with how far I got, yet I still put the site back on hold. There was no real urgency, and at that point it was still just for fun.
+For the first time, I was applying my engineering judgment to web development and seeing real visual results in minutes instead of weeks. I was pretty happy with how far I got, yet I still put the site back on hold. There was no real urgency, and at that point doing it was still just for fun.
 
 ## A year later, it stopped being a side project
 
@@ -41,7 +40,7 @@ I also didn't want generic AI styling or mismatched copy across platforms. So I 
 
 ## Noticing how early we still are with AI
 
-Going through this rebuild also made me look around at how other people use AI. Ever since the layoff, it feels like I sort of woke up. I started noticing how AI is slowly but surely getting into other people's lives. At the same time, adoption rates are still really low, and most people either don't use it at all or use it as a simple chatbot for proofreading. I realized the AI expertise I built over the past couple of years could come in handy, and that I can start helping other people step into this new era.
+Going through this rebuild also made me look around at how other people are using AI. Ever since the layoff, it feels like I sort of woke up. I started noticing how AI is slowly but surely getting into other people's lives. At the same time, adoption rates are still really low, and most people either don't use it at all or use it as a simple chatbot for proofreading. I realized the AI expertise I have built over the past couple of years could come in handy, and that I can start helping other people step into this new era.
 
 ## What comes next
 
