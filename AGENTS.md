@@ -32,7 +32,7 @@ src/
 ├── components/
 │   ├── Navigation.astro          - Top navigation bar with contact popover
 │   ├── Footer.astro              - Footer with copyright year
-│   ├── Icon.astro                - Inline SVG icons (arrow-left, external-link, info)
+│   ├── Icon.astro                - Inline SVG icons (arrow-left, external-link, info, rss)
 │   ├── HeroSection.astro         - Hero section with bio and sketch portrait
 │   ├── HowIHelpSection.astro     - Services and advisory capabilities section
 │   └── ExperienceSection.astro   - Experience timeline (uses data/experience.ts)
@@ -48,6 +48,7 @@ src/
 │   ├── about.astro               - About page (bio, competencies, experience timeline)
 │   ├── 404.astro                 - Custom 404 error page
 │   ├── thanks.astro              - Contact form confirmation page
+│   ├── rss.xml.ts                - RSS feed with full text of published (non-draft) blog posts at /rss.xml
 │   ├── og/
 │   │   └── [...slug].png.ts      - Build-time 1200x630 social preview image per blog post (satori + sharp)
 │   └── blog/
@@ -112,6 +113,7 @@ Never push changes without the user's testing and approval first.
 - Experience timeline driven by `src/data/experience.ts`.
 - Automatic dark mode via CSS media queries.
 - Open Graph and Twitter Card metadata, including publish dates, image alt text, and per-post generated preview images (`/og/<slug>.png`; a post's `image` frontmatter overrides it).
+- Full-text RSS feed at `/rss.xml` (published posts only), advertised via `<link rel="alternate">` and linked from the blog index.
 - JSON-LD structured data (Person/WebSite on home, ProfilePage on About, BlogPosting on posts) built in `BaseLayout.astro`.
 - Contact form integrated with FormSubmit.co.
 - Responsive mobile navigation and layouts.

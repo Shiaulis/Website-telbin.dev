@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Navigation from '../../components/Navigation.astro';
 import Footer from '../../components/Footer.astro';
+import Icon from '../../components/Icon.astro';
 import '../../styles/global.css';
 
 const posts = (await getCollection('blog', ({ data }) => import.meta.env.DEV || !data.draft))
@@ -18,6 +19,9 @@ const posts = (await getCollection('blog', ({ data }) => import.meta.env.DEV || 
 		<section class="blog-section">
 			<h1>Blog</h1>
 			<p class="blog-intro">Thoughts on AI workflows, software architecture, and practical engineering</p>
+			<p class="blog-feed">
+				<a href="/rss.xml"><Icon name="rss" /> Subscribe via RSS</a>
+			</p>
 
 			<div class="blog-posts">
 				{posts.map((post) => (
