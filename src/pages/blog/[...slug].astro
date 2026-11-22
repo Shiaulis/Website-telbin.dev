@@ -23,8 +23,14 @@ const { Content } = await render(post);
 <BaseLayout
 	title={`${post.data.title} | Andrius Shiaulis`}
 	description={post.data.description}
-	image={post.data.image}
+	socialTitle={post.data.title}
+	image={post.data.image ?? `/og/${post.id}.png`}
+	imageAlt={post.data.image ? undefined : `${post.data.title} — blog post by Andrius Shiaulis`}
+	imageWidth={post.data.image ? undefined : 1200}
+	imageHeight={post.data.image ? undefined : 630}
 	type="article"
+	publishedTime={post.data.pubDate}
+	modifiedTime={post.data.updatedDate}
 >
 	<Navigation />
 	<main>

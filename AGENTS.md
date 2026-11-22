@@ -2,7 +2,7 @@
 
 ## Project overview
 
-Personal portfolio website for Andrius Shiaulis, a Senior Software Engineer & AI Workflow Advisor. Built with Astro 7.4.7 and deployed automatically via GitHub Actions to Hostinger FTP.
+Personal portfolio website for Andrius Shiaulis, a Senior Software Engineer & AI Workflow Advisor. Built with Astro 7.4.12 and deployed automatically via GitHub Actions to Hostinger FTP.
 
 ## Communication
 
@@ -47,6 +47,8 @@ src/
 │   ├── about.astro               - About page (bio, competencies, experience timeline)
 │   ├── 404.astro                 - Custom 404 error page
 │   ├── thanks.astro              - Contact form confirmation page
+│   ├── og/
+│   │   └── [...slug].png.ts      - Build-time 1200x630 social preview image per blog post (satori + sharp)
 │   └── blog/
 │       ├── index.astro           - Blog listing page
 │       └── [...slug].astro       - Dynamic blog post pages
@@ -56,7 +58,8 @@ src/
 public/
 ├── .htaccess                     - Custom 404 routing
 ├── robots.txt                    - Crawler directives
-└── favicon.svg                   - Adaptive Waypoint favicon
+├── favicon.svg                   - Adaptive Waypoint favicon
+└── apple-touch-icon.png          - 180x180 PNG icon for iOS/iPadOS (SVG favicons are unsupported there)
 ```
 
 To add a section, create a component in `src/components/` and import it in `src/pages/index.astro`.
@@ -107,7 +110,8 @@ Never push changes without the user's testing and approval first.
 - Type-safe blog content collections with Markdown and tags.
 - Experience timeline driven by `src/data/experience.ts`.
 - Automatic dark mode via CSS media queries.
-- Open Graph and Twitter Card metadata.
+- Open Graph and Twitter Card metadata, including publish dates, image alt text, and per-post generated preview images (`/og/<slug>.png`; a post's `image` frontmatter overrides it).
+- JSON-LD structured data (Person/WebSite on home, ProfilePage on About, BlogPosting on posts) built in `BaseLayout.astro`.
 - Contact form integrated with FormSubmit.co.
 - Responsive mobile navigation and layouts.
 
