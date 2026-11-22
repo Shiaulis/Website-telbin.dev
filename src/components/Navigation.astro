@@ -144,12 +144,6 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
 </nav>
 
 <script>
-	if (!Object.hasOwn(HTMLElement.prototype, 'popover')) {
-		const script = document.createElement('script');
-		script.src = 'https://unpkg.com/@oddbird/popover-polyfill@latest/dist/popover.min.js';
-		document.head.append(script);
-	}
-
 	const trigger = document.getElementById('contact-trigger') as HTMLButtonElement | null;
 	const popover = document.getElementById('contact-popover') as HTMLElement | null;
 
