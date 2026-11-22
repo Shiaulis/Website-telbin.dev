@@ -9,7 +9,6 @@
     --card-bg-color: #1A1C20;
     --card-text-color: #EEEFF1;
     --border-color: #D5D8DF;
-    --button-text-color: #ffffff;
     --font-sans: var(--font-jakarta);
     --font-serif: var(--font-source-serif);
     --font-mono: var(--font-fira-code);
@@ -27,7 +26,6 @@
         --border-color: #2c2f36;
         --brand-accent: #CBD689;
         --link-color: var(--brand-accent);
-        --button-text-color: #1A1C20;
     }
 }
 
