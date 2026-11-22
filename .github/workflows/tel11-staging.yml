@@ -34,12 +34,13 @@ jobs:
       - name: Build Astro project
         run: npm run build
 
-      - name: Adjust _astro path match for the staging subfolder
-        # In the subfolder the request path is /_tel11-staging/_astro/..., so only the
-        # anchored prefix in the <If> expression is changed; everything else is identical.
+      - name: Adjust root-relative paths for the staging subfolder
+        # In the subfolder the request path is /_tel11-staging/..., so only the anchored
+        # _astro prefix and the ErrorDocument path are changed; everything else is identical.
         run: |
-          sed -i 's|\^/_astro/|^/_tel11-staging/_astro/|' dist/.htaccess
+          sed -i 's|\^/_astro/|^/_tel11-staging/_astro/|; s|^ErrorDocument 404 /404.html$|ErrorDocument 404 /_tel11-staging/404.html|' dist/.htaccess
           grep -q '\^/_tel11-staging/_astro/' dist/.htaccess
+          grep -q '^ErrorDocument 404 /_tel11-staging/404.html$' dist/.htaccess
           cat dist/.htaccess
 
       - name: Set up SSH
@@ -98,6 +99,7 @@ jobs:
 
           show "$BASE/does-not-exist-$CB/"
           [ "$(status)" = 404 ] || { echo "expected 404"; FAIL=1; }
+          curl -sS "$BASE/does-not-exist-$CB/" | grep -o '<title>[^<]*</title>' || true
           security 404
 
           show "https://www.telbin.dev/_tel11-staging/?$CB&q=1"
