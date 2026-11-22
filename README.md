@@ -57,7 +57,7 @@ Built with [Astro](https://astro.build/) as a fast, zero-JavaScript-framework st
 │   ├── content.config.ts         # Content Collections schema
 │   ├── data/experience.ts        # Work history timeline & core competencies data
 │   ├── layouts/BaseLayout.astro  # Shared HTML head, SEO, and Open Graph metadata
-│   ├── pages/                    # File-based routes (/, /about, /blog, /thanks, /404)
+│   ├── pages/                    # File-based routes (/, /about, /blog, /rss.xml, /404)
 │   └── styles/global.css         # Design tokens, typography, and component styles
 ├── AGENTS.md                     # Instructions and context for AI coding agents
 └── BRAND.md                      # Brand guidelines, palette tokens, and logo usage
