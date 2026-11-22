@@ -1,0 +1,134 @@
+# TEMPORARY (TEL-22): test public/.htaccess on the real Hostinger server inside an
+# isolated subfolder before it goes live. Deleted again before the PR is reviewed.
+name: TEL-22 .htaccess staging test
+
+on:
+  push:
+    branches:
+      - shiaulis/tel-22-performance-caching
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tel22-staging
+  cancel-in-progress: false
+
+jobs:
+  staging:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Astro project
+        run: npm run build
+
+      - name: Adjust paths for the staging subfolder
+        # In the subfolder the request path is /_tel22-staging/_astro/..., so only the anchored
+        # prefix in the <If> expression and the ErrorDocument path change; everything else is identical.
+        run: |
+          sed -i 's|\^/_astro/|^/_tel22-staging/_astro/|' dist/.htaccess
+          sed -i 's|^ErrorDocument 404 /404.html|ErrorDocument 404 /_tel22-staging/404.html|' dist/.htaccess
+          grep -q '\^/_tel22-staging/_astro/' dist/.htaccess
+          grep -q '^ErrorDocument 404 /_tel22-staging/404.html' dist/.htaccess
+          cat dist/.htaccess
+
+      - name: Set up SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          install -d -m 700 ~/.ssh
+          (umask 077; printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key)
+          (umask 077; printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts)
+
+      - name: Upload to staging subfolder only (no --delete)
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_TARGET_DIR: ${{ secrets.SSH_TARGET_DIR }}
+        run: |
+          [ -n "$SSH_TARGET_DIR" ] || { echo "SSH_TARGET_DIR is empty"; exit 1; }
+          STAGING="${SSH_TARGET_DIR%/}/_tel22-staging"
+          case "$STAGING" in */_tel22-staging) ;; *) echo "bad staging path"; exit 1 ;; esac
+          rsync -rlcz --chmod=D755,F644 --itemize-changes \
+            -e "ssh -i $HOME/.ssh/deploy_key -p $SSH_PORT -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts -o BatchMode=yes" \
+            dist/ "$SSH_USER@$SSH_HOST:$STAGING/"
+
+      - name: Check responses with curl
+        run: |
+          CB="cb=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          BASE="https://telbin.dev/_tel22-staging"
+          CSS="$(cd dist && find _astro -maxdepth 1 -type f -name '*.css' -print -quit)"
+          FONT="$(cd dist && find _astro/fonts -type f -name '*.woff2' -print -quit)"
+          HERO="$(cd dist && find _astro -maxdepth 1 -type f -name 'hero-sketch*.webp' -print -quit)"
+          FAIL=0
+          show() {
+            echo "=== $1"
+            curl -sS -o /dev/null -D /tmp/h.txt "$1" || true
+            head -n 1 /tmp/h.txt
+            grep -iE '^(cache-control|expires|etag|last-modified|content-type|content-security-policy|x-hcdn-cache-status):' /tmp/h.txt || true
+            echo
+          }
+          status() { head -n 1 /tmp/h.txt | awk '{print $2}'; }
+          expect() { [ "$(status)" = "$1" ] || { echo "FAIL: expected HTTP $1"; FAIL=1; }; }
+          one_cc() { [ "$(grep -ci '^cache-control:' /tmp/h.txt)" = 1 ] || { echo "FAIL: expected exactly one Cache-Control"; FAIL=1; }; }
+          nocache() { one_cc; grep -qi '^cache-control: *no-cache *\r\?$' /tmp/h.txt || { echo "FAIL: expected Cache-Control: no-cache"; FAIL=1; }; }
+          immutable() { one_cc; grep -qi '^cache-control: *public, max-age=31536000, immutable *\r\?$' /tmp/h.txt || { echo "FAIL: expected 1-year immutable"; FAIL=1; }; }
+          csp() { grep -qi "^content-security-policy: frame-ancestors 'none'" /tmp/h.txt || { echo "FAIL: CSP header missing"; FAIL=1; }; }
+
+          for p in "/" "/about/" "/blog/" "/blog/finally-finishing-my-website/" "/rss.xml" "/sitemap-index.xml" "/sitemap-0.xml"; do
+            show "$BASE$p?$CB"; expect 200; nocache; csp
+          done
+
+          show "$BASE/does-not-exist-$CB/"; expect 404; nocache; csp
+
+          for a in "$CSS" "$FONT" "$HERO"; do
+            [ -n "$a" ] || { echo "FAIL: asset not found in dist"; FAIL=1; continue; }
+            show "$BASE/$a?$CB"; expect 200; immutable
+          done
+
+          show "$BASE/favicon.svg?$CB"; expect 200
+          grep -qi '^cache-control:.*\(no-cache\|immutable\)' /tmp/h.txt && { echo "FAIL: favicon.svg caching changed"; FAIL=1; }
+
+          echo "=== revalidation: conditional request for the home page"
+          ETAG="$(curl -sS -o /dev/null -D - "$BASE/?$CB" | grep -i '^etag:' | sed 's/^[^:]*: *//; s/\r$//')"
+          echo "etag: $ETAG"
+          curl -sS -o /dev/null -w 'conditional GET -> HTTP %{http_code}\n' -H "If-None-Match: $ETAG" -H 'Accept-Encoding: gzip' "$BASE/?$CB"
+
+          echo "=== live site root (unchanged by this test)"
+          curl -sS -o /dev/null -w '%{http_code}\n' "https://telbin.dev/?$CB"
+          exit $FAIL
+
+      - name: Remove staging subfolder
+        if: always()
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_TARGET_DIR: ${{ secrets.SSH_TARGET_DIR }}
+        run: |
+          [ -f ~/.ssh/deploy_key ] || { echo "no SSH key, nothing uploaded"; exit 0; }
+          [ -n "$SSH_TARGET_DIR" ] || { echo "SSH_TARGET_DIR is empty, refusing"; exit 1; }
+          STAGING="${SSH_TARGET_DIR%/}/_tel22-staging"
+          case "$STAGING" in */_tel22-staging) ;; *) echo "bad staging path, refusing"; exit 1 ;; esac
+          ssh -i ~/.ssh/deploy_key -p "$SSH_PORT" -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes \
+            -o UserKnownHostsFile="$HOME/.ssh/known_hosts" -o BatchMode=yes "$SSH_USER@$SSH_HOST" \
+            "rm -rf -- $(printf '%q' "$STAGING") && echo removed staging folder"
+          curl -sS -o /dev/null -w 'after cleanup /_tel22-staging/ -> HTTP %{http_code}\n' "https://telbin.dev/_tel22-staging/?cb=${GITHUB_RUN_ID}-gone"
+
+      - name: Remove SSH key
+        if: always()
+        run: rm -f ~/.ssh/deploy_key

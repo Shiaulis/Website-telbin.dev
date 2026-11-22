@@ -59,7 +59,7 @@ src/
     └── global.css                - All styles including dark mode support
 
 public/
-├── .htaccess                     - 404 page, www→apex redirect, security headers (incl. CSP part 1), 1-year /_astro/ caching
+├── .htaccess                     - 404 page, www→apex redirect, security headers (incl. CSP part 1), 1-year /_astro/ caching, no-cache for HTML/XML
 ├── robots.txt                    - Crawler directives
 ├── favicon.svg                   - Adaptive Waypoint favicon
 └── apple-touch-icon.png          - 180x180 PNG icon for iOS/iPadOS (SVG favicons are unsupported there)
@@ -100,6 +100,8 @@ Required fields: `title` (string), `description` (string), and `pubDate` (date i
 ## Deployment
 
 Pushes to `master` automatically trigger `.github/workflows/deploy.yml`, which builds the Astro site and deploys `dist/` to Hostinger with rsync over SSH (key-based login, pinned host key). The required `SSH_HOST`, `SSH_PORT`, `SSH_USER`, `SSH_TARGET_DIR`, `SSH_PRIVATE_KEY`, and `SSH_KNOWN_HOSTS` secrets are already configured.
+
+Hostinger's CDN (`server: hcdn`) sits in front of the site and caches static assets (images, fonts, CSS, JS) together with their response headers. After a deploy that changes `public/.htaccess` headers, purge the CDN cache in hPanel (the website's CDN settings) so cached assets pick up the new headers. HTML and XML aren't cached by the CDN (`x-hcdn-cache-status: DYNAMIC`) and send `Cache-Control: no-cache`, so new pages show up immediately.
 
 CI (`.github/workflows/ci.yml`) and deploy both build on Node 24 LTS. `engines.node` in `package.json` (`>=22.23.4`) mirrors Astro 7's own minimum.
 

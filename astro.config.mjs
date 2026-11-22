@@ -12,7 +12,9 @@ export default defineConfig({
 			name: 'Plus Jakarta Sans',
 			cssVariable: '--font-jakarta',
 			weights: ['400 700'],
-			styles: ['normal', 'italic'],
+			// No italic file (~30 KB): only the short hero greeting is italic, and the browser's
+			// slanted version of the upright font looks nearly the same there.
+			styles: ['normal'],
 			subsets: ['latin', 'latin-ext'],
 			fallbacks: ['system-ui', 'sans-serif'],
 		},
@@ -20,7 +22,9 @@ export default defineConfig({
 			provider: fontProviders.fontsource(),
 			name: 'Source Serif 4',
 			cssVariable: '--font-source-serif',
-			weights: ['400 700'],
+			// Static 400/700 files instead of the variable font: blog text only uses regular and bold,
+			// and the variable file was ~120 KB, most of a post page's download.
+			weights: [400, 700],
 			styles: ['normal', 'italic'],
 			subsets: ['latin', 'latin-ext'],
 			fallbacks: ['Georgia', 'serif'],
