@@ -3,6 +3,8 @@ import { Font, getImage } from 'astro:assets';
 import ogBanner from '../assets/og-banner.png';
 import authorPhoto from '../assets/author-photo.jpg';
 
+const DEFAULT_DESCRIPTION = 'Senior Software Engineer and Technical Advisor, 11+ years (Pipedrive, Readdle). I help teams bring practical AI workflows into daily work.';
+
 interface Props {
 	title?: string;
 	description?: string;
@@ -21,7 +23,7 @@ interface Props {
 
 const {
 	title = "Andrius Shiaulis | Senior Software Engineer & AI Workflow Advisor",
-	description = "Senior Software Engineer and Technical Advisor with 11+ years in tech (Pipedrive, Readdle), helping individuals and teams bring practical AI tools, custom agent workflows, and resilient architecture into daily work.",
+	description = DEFAULT_DESCRIPTION,
 	socialTitle,
 	image,
 	imageAlt: imageAltProp,
@@ -58,7 +60,7 @@ const person = {
 	name: 'Andrius Shiaulis',
 	url: homeURL,
 	jobTitle: 'Senior Software Engineer & AI Workflow Advisor',
-	description: 'Senior Software Engineer and Technical Advisor with 11+ years in tech (Pipedrive, Readdle), helping individuals and teams bring practical AI tools, custom agent workflows, and resilient architecture into daily work.',
+	description: DEFAULT_DESCRIPTION,
 	image: new URL(personImage.src, siteURL).href,
 	knowsAbout: [
 		'Software engineering',
@@ -120,7 +122,7 @@ const structuredDataJSON = structuredData && JSON.stringify(structuredData).repl
 	<meta name="description" content={description}>
 	<meta name="author" content="Andrius Shiaulis">
 	{noindex && <meta name="robots" content="noindex">}
-	<link rel="canonical" href={canonicalURL}>
+	{!noindex && <link rel="canonical" href={canonicalURL}>}
 	<link rel="sitemap" href="/sitemap-index.xml">
 	<link rel="alternate" type="application/rss+xml" title="Andrius Shiaulis" href={new URL('/rss.xml', siteURL)}>
 
@@ -133,7 +135,7 @@ const structuredDataJSON = structuredData && JSON.stringify(structuredData).repl
 	<meta property="og:image:alt" content={imageAlt}>
 	{ogImageWidth && <meta property="og:image:width" content={String(ogImageWidth)}>}
 	{ogImageHeight && <meta property="og:image:height" content={String(ogImageHeight)}>}
-	<meta property="og:url" content={canonicalURL}>
+	{!noindex && <meta property="og:url" content={canonicalURL}>}
 	<meta property="og:type" content={type}>
 	{publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()}>}
 	{publishedTime && <meta name="publish_date" property="og:publish_date" content={publishedTime.toISOString()}>}

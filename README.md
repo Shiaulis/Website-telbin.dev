@@ -31,7 +31,9 @@ Built with [Astro](https://astro.build/) as a fast, zero-JavaScript-framework st
 - **Static-first performance** — Pre-rendered HTML & CSS with Astro image optimization (`src/assets/`) and zero client-side UI framework overhead.
 - **Adaptive Waypoint brand system** — Light and dark mode color tokens (`#4D6B1A` sage / `#CBD689` lime) paired with **Plus Jakarta Sans**. Full specifications and SVG assets live in [`BRAND.md`](BRAND.md).
 - **Obsidian-friendly blog** — Type-safe Markdown blog powered by Astro Content Collections (`src/content/blog/`) with draft preview support.
-- **SEO & sharing ready** — Canonical URLs, auto-generated XML sitemap (`@astrojs/sitemap`), Open Graph & Twitter card metadata, and custom `404` routing.
+- **SEO & sharing ready** — Canonical URLs, auto-generated XML sitemap (`@astrojs/sitemap`), Open Graph & Twitter card metadata with a generated preview image per post (`/og/<slug>.png`), JSON-LD structured data, and a custom `404` page.
+- **Full-text RSS feed** — Published posts at `/rss.xml`, advertised in every page's `<head>` and linked from the blog index.
+- **Security headers & CSP** — Enforced Content-Security-Policy (build-time hashes via `security.csp` in `astro.config.mjs`, plus a header part in `public/.htaccess`), HSTS and other security headers.
 - **Automated deployment** — Validated with `astro check` and deployed to Hostinger via GitHub Actions on every push to `master`.
 
 ## Tech Stack
@@ -47,17 +49,18 @@ Built with [Astro](https://astro.build/) as a fast, zero-JavaScript-framework st
 ```text
 ├── brand/                        # Waypoint logo SVGs, usage sheet, and LinkedIn banner
 ├── public/
-│   ├── .htaccess                 # Apache custom 404 routing
+│   ├── .htaccess                 # 404 page, www→apex redirect, security headers (incl. CSP part 1), 1-year /_astro/ caching
+│   ├── apple-touch-icon.png      # 180x180 icon for iOS/iPadOS home screens
 │   ├── favicon.svg               # Adaptive Waypoint favicon
 │   └── robots.txt                # Crawler directives & sitemap pointer
 ├── src/
-│   ├── assets/                   # Build-optimized images (hero sketch, Open Graph banner)
-│   ├── components/               # UI sections (Navigation, Hero, HowIHelp, Experience, Footer)
+│   ├── assets/                   # Build-optimized images (hero sketch, author photo, Open Graph banner)
+│   ├── components/               # UI sections (Navigation, Hero, HowIHelp, Experience, Footer) and Icon
 │   ├── content/blog/             # Markdown blog posts
 │   ├── content.config.ts         # Content Collections schema
 │   ├── data/experience.ts        # Work history timeline & core competencies data
 │   ├── layouts/BaseLayout.astro  # Shared HTML head, SEO, and Open Graph metadata
-│   ├── pages/                    # File-based routes (/, /about, /blog, /rss.xml, /404)
+│   ├── pages/                    # File-based routes (/, /about, /blog, /rss.xml, /og/<slug>.png, /404, unlisted /ipad-cases)
 │   └── styles/global.css         # Design tokens, typography, and component styles
 ├── AGENTS.md                     # Instructions and context for AI coding agents
 └── BRAND.md                      # Brand guidelines, palette tokens, and logo usage
@@ -84,12 +87,16 @@ Blog posts live in `src/content/blog/` as Markdown files (compatible with using 
 title: "Post Title"
 description: "Brief summary for listings and Open Graph tags"
 pubDate: 2026-11-19
+updatedDate: 2026-11-21  # Optional: shown as "Updated" and used as the modified date
 draft: true              # Optional: visible in local dev, excluded from production builds
 tags: ["ai", "swift"]
+image: "/images/post.png" # Optional: overrides the generated /og/<slug>.png preview image
 ---
 
 Post content here...
 ```
+
+`title`, `description` and `pubDate` are required; everything else is optional (schema in `src/content.config.ts`).
 
 ## Deployment
 

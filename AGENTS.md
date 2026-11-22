@@ -88,14 +88,16 @@ Frontmatter format:
 title: "Post Title"
 description: "Brief description"
 pubDate: 2025-10-03
+updatedDate: 2025-10-10  # Optional: shown as "Updated" and used as the modified date
 draft: true              # Optional: true hides the post from published listing
 tags: ["tag1", "tag2"]
+image: "/images/post.png" # Optional: overrides the generated /og/<slug>.png preview image
 ---
 
 Post content here...
 ```
 
-Required fields: `title` (string), `description` (string), and `pubDate` (date in `YYYY-MM-DD` format). `draft` is optional and boolean; `tags` is an array of strings.
+Required fields: `title` (string), `description` (string), and `pubDate` (date in `YYYY-MM-DD` format). Optional fields: `updatedDate` (date), `draft` (boolean), `tags` (array of strings), and `image` (string path or URL; overrides the generated Open Graph image).
 
 ## Deployment
 
