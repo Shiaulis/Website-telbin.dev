@@ -35,8 +35,10 @@
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
 }
 
 body {
@@ -50,6 +52,26 @@ body {
 a {
     color: var(--link-color);
     text-decoration: none;
+}
+
+/* Skip link: first Tab stop on every page, hidden above the viewport until focused. */
+.skip-link {
+    position: absolute;
+    inset-block-start: 8px;
+    inset-inline-start: 8px;
+    z-index: 1000;
+    padding: 10px 16px;
+    border-radius: 8px;
+    background-color: var(--text-color);
+    color: var(--background-color);
+    font-weight: 600;
+    translate: 0 calc(-100% - 16px);
+}
+
+.skip-link:focus {
+    translate: 0 0;
+    outline: 2px solid var(--link-color);
+    outline-offset: 2px;
 }
 
 /* Navigation bar */

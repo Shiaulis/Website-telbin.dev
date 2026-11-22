@@ -174,11 +174,27 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
 		});
 		// [data-contact-link] anchors already have a mailto: href, so they need no handling here.
 	} else if (trigger && popover) {
+		// The in-page link ("Get in touch") that opened the popover, so focus can go back to it on close.
+		let openerLink: HTMLAnchorElement | null = null;
+		let restoreFocus = false;
+
+		// Runs before the popover hides: only restore focus if it was still inside the popover
+		// (Escape, or a close from within). A click elsewhere has already moved focus, so leave it there.
+		popover.addEventListener('beforetoggle', (event) => {
+			if ((event as ToggleEvent).newState === 'closed') {
+				restoreFocus = openerLink !== null && popover.contains(document.activeElement);
+			}
+		});
+
 		popover.addEventListener('toggle', (event) => {
 			const isOpen = (event as ToggleEvent).newState === 'open';
 			trigger.setAttribute('aria-expanded', String(isOpen));
 			if (isOpen) {
 				positionFallback();
+			} else {
+				if (restoreFocus) openerLink?.focus({ preventScroll: true });
+				openerLink = null;
+				restoreFocus = false;
 			}
 		});
 
@@ -191,10 +207,15 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
 		document.querySelectorAll<HTMLAnchorElement>('a[data-contact-link]').forEach((link) => {
 			link.addEventListener('click', (event) => {
 				event.preventDefault();
-				window.scrollTo({ top: 0, behavior: 'smooth' });
-				if (trigger.getAttribute('aria-expanded') !== 'true') {
+				const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+				window.scrollTo({ top: 0, behavior: reduceMotion ? 'instant' : 'smooth' });
+				if (!popover.matches(':popover-open')) {
 					popover.showPopover?.({ source: trigger } as ShowPopoverOptions);
 				}
+				// Move focus into the menu so keyboard and VoiceOver users land on its first item.
+				// preventScroll keeps the scroll-to-top above from being cut short.
+				openerLink = link;
+				popover.querySelector<HTMLElement>('.contact-item')?.focus({ preventScroll: true });
 			});
 		});
 	}
