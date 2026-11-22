@@ -168,11 +168,18 @@ nav .nav-right {
     }
 }
 
-.contact-popover:not(:is(:popover-open, .\:popover-open)) {
+/* No Popover API: never show the panel (the Contact button falls back to mailto: in Navigation.astro). */
+@supports not selector(:popover-open) {
+    .contact-popover {
+        display: none;
+    }
+}
+
+.contact-popover:not(:popover-open) {
     display: none;
 }
 
-.contact-popover:is(:popover-open, .\:popover-open) {
+.contact-popover:popover-open {
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -186,7 +193,7 @@ nav .nav-right {
         transition-behavior: allow-discrete;
     }
 
-    .contact-popover[popover]:is(:popover-open, .\:popover-open) {
+    .contact-popover[popover]:popover-open {
         opacity: 1;
         translate: 0 0;
         transition-duration: 0.12s;

@@ -144,12 +144,6 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
 </nav>
 
 <script>
-	if (!Object.hasOwn(HTMLElement.prototype, 'popover')) {
-		const script = document.createElement('script');
-		script.src = 'https://unpkg.com/@oddbird/popover-polyfill@latest/dist/popover.min.js';
-		document.head.append(script);
-	}
-
 	const trigger = document.getElementById('contact-trigger') as HTMLButtonElement | null;
 	const popover = document.getElementById('contact-popover') as HTMLElement | null;
 
@@ -169,7 +163,19 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
 		popover.style.left = `${left}px`;
 	}
 
-	if (trigger && popover) {
+	const contactMailto = 'mailto:andrius@telbin.dev';
+
+	if (trigger && popover && typeof popover.showPopover !== 'function') {
+		// No Popover API: the panel stays hidden (see global.css), so go straight to email.
+		trigger.removeAttribute('aria-expanded');
+		trigger.removeAttribute('aria-controls');
+		trigger.addEventListener('click', () => {
+			window.location.href = contactMailto;
+		});
+		document.querySelectorAll<HTMLAnchorElement>('a[href="#contact"]').forEach((link) => {
+			link.href = contactMailto;
+		});
+	} else if (trigger && popover) {
 		popover.addEventListener('toggle', (event) => {
 			const isOpen = (event as ToggleEvent).newState === 'open';
 			trigger.setAttribute('aria-expanded', String(isOpen));
