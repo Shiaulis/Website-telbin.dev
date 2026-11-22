@@ -129,6 +129,9 @@ jobs:
                 const tag = `[${bname}/${colorScheme}] ${p.name}`;
                 const page = await context.newPage();
                 const consoleErrors = [];
+                const imageResponses = [];
+                page.on('response', (r) => { if (r.request().resourceType() === 'image' && !r.url().startsWith(new URL(BASE).origin)) imageResponses.push(`${r.status()} ${r.url()}`); });
+                page.on('requestfailed', (r) => consoleErrors.push(`requestfailed: ${r.url()} ${r.failure()?.errorText}`));
                 page.on('console', (m) => {
                   // The 404 page's own document status is logged as a resource error by Chromium; that is expected.
                   if (p.status === 404 && /\b404\b/.test(m.text()) && !/content.security|csp/i.test(m.text())) return;
@@ -158,13 +161,15 @@ jobs:
                 }
                 if (p.images) {
                   await page.evaluate(async () => {
-                    for (const img of document.images) { img.loading = 'eager'; img.scrollIntoView(); await new Promise((r) => setTimeout(r, 100)); }
+                    const timeout = () => new Promise((r) => setTimeout(r, 15000));
+                    await Promise.all([...document.images].map((img) => { img.loading = 'eager'; img.scrollIntoView(); return Promise.race([img.decode().catch(() => {}), timeout()]); }));
                   });
                   await page.waitForLoadState('networkidle', { timeout: 15000 }).catch(() => {});
                   info.images = await page.evaluate(() => [...document.images].map((i) => ({ src: i.currentSrc || i.src, ok: i.complete && i.naturalWidth > 0 })));
                   const external = info.images.filter((i) => !i.src.startsWith(new URL(BASE).origin));
                   info.externalImagesLoaded = `${external.filter((i) => i.ok).length}/${external.length}`;
-                  for (const i of info.images) if (!i.ok) fail(`${tag}: image did not load: ${i.src}`);
+                  info.externalImageResponses = imageResponses.map((r) => r.split(' ')[0]).join(',');
+                  for (const i of info.images) if (!i.ok) fail(`${tag}: image did not load: ${i.src} (responses: ${imageResponses.filter((r) => r.endsWith(i.src)).join('; ') || 'none'})`);
                 }
                 if (p.contact) {
                   await page.evaluate(() => window.scrollTo(0, 0));
