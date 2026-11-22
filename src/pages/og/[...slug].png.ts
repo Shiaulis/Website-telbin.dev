@@ -18,9 +18,9 @@ const fontFile = (pkg: string, file: string) =>
 
 const fontsPromise = Promise.all([
 	fontFile('plus-jakarta-sans', 'plus-jakarta-sans-latin-700-normal.woff').then((data) => ({ name: 'Jakarta', data, weight: 700 as const })),
-	fontFile('plus-jakarta-sans', 'plus-jakarta-sans-latin-ext-700-normal.woff').then((data) => ({ name: 'Jakarta', data, weight: 700 as const })),
+	fontFile('plus-jakarta-sans', 'plus-jakarta-sans-latin-ext-700-normal.woff').then((data) => ({ name: 'Jakarta Extended', data, weight: 700 as const })),
 	fontFile('plus-jakarta-sans', 'plus-jakarta-sans-latin-500-normal.woff').then((data) => ({ name: 'Jakarta', data, weight: 500 as const })),
-	fontFile('plus-jakarta-sans', 'plus-jakarta-sans-latin-ext-500-normal.woff').then((data) => ({ name: 'Jakarta', data, weight: 500 as const })),
+	fontFile('plus-jakarta-sans', 'plus-jakarta-sans-latin-ext-500-normal.woff').then((data) => ({ name: 'Jakarta Extended', data, weight: 500 as const })),
 	fontFile('fira-code', 'fira-code-latin-500-normal.woff').then((data) => ({ name: 'Fira Code', data, weight: 500 as const })),
 ]);
 
