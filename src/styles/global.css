@@ -771,8 +771,27 @@ footer {
 
 .blog-section .blog-intro {
     font-size: 18px;
-    margin-bottom: 40px;
+    margin-bottom: 12px;
     opacity: 0.8;
+}
+
+.blog-feed {
+    margin-bottom: 40px;
+    font-size: 14px;
+}
+
+.blog-feed a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+.blog-feed a:hover {
+    text-decoration: underline;
+}
+
+.blog-feed .icon {
+    margin-right: 4px;
+    vertical-align: -0.125em;
 }
 
 .blog-posts {
