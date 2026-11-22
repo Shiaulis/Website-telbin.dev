@@ -14,8 +14,10 @@ export const GET: APIRoute = async (context) => {
 	const container = await AstroContainer.create();
 
 	// Feed readers show posts outside telbin.dev, so site-relative links ("/about/") must become absolute.
+	// Only attributes inside real tags are rewritten; code text is HTML-escaped ("&lt;"), so examples stay as written.
+	const siteRoot = new URL('/', site).href;
 	const absolutizeLinks = (html: string) =>
-		html.replace(/(href|src)="\/(?!\/)/g, `$1="${new URL('/', site).href}`);
+		html.replace(/<[a-z][^>]*>/gi, (tag) => tag.replace(/(\s(?:href|src)=")\/(?!\/)/gi, `$1${siteRoot}`));
 
 	const items = await Promise.all(posts.map(async (post) => {
 		const { Content } = await render(post);
