@@ -172,9 +172,7 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
 		trigger.addEventListener('click', () => {
 			window.location.href = contactMailto;
 		});
-		document.querySelectorAll<HTMLAnchorElement>('a[href="#contact"]').forEach((link) => {
-			link.href = contactMailto;
-		});
+		// [data-contact-link] anchors already have a mailto: href, so they need no handling here.
 	} else if (trigger && popover) {
 		popover.addEventListener('toggle', (event) => {
 			const isOpen = (event as ToggleEvent).newState === 'open';
@@ -190,7 +188,7 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
 			}
 		});
 
-		document.querySelectorAll<HTMLAnchorElement>('a[href="#contact"]').forEach((link) => {
+		document.querySelectorAll<HTMLAnchorElement>('a[data-contact-link]').forEach((link) => {
 			link.addEventListener('click', (event) => {
 				event.preventDefault();
 				window.scrollTo({ top: 0, behavior: 'smooth' });
