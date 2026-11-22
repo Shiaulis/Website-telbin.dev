@@ -2,6 +2,10 @@ import rss from '@astrojs/rss';
 import type { APIRoute } from 'astro';
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { getCollection, render } from 'astro:content';
+import type { Element, Root, RootContent } from 'hast';
+import rehypeParse from 'rehype-parse';
+import rehypeStringify from 'rehype-stringify';
+import { unified } from 'unified';
 
 // RSS feed of published blog posts at /rss.xml, for feed readers and aggregators.
 // Each item carries the full post HTML, rendered by Astro exactly as on the site.
@@ -14,10 +18,22 @@ export const GET: APIRoute = async (context) => {
 	const container = await AstroContainer.create();
 
 	// Feed readers show posts outside telbin.dev, so site-relative links ("/about/") must become absolute.
-	// Only attributes inside real tags are rewritten; code text is HTML-escaped ("&lt;"), so examples stay as written.
-	const siteRoot = new URL('/', site).href;
-	const absolutizeLinks = (html: string) =>
-		html.replace(/<[a-z][^>]*>/gi, (tag) => tag.replace(/(\s(?:href|src)=")\/(?!\/)/gi, `$1${siteRoot}`));
+	// The HTML is parsed (not regex-matched), so any quoting style works and code examples stay as written.
+	const absolutizeLinks = (node: Root | RootContent) => {
+		if (node.type === 'element') {
+			for (const name of ['href', 'src'] as const) {
+				const value = (node as Element).properties[name];
+				if (typeof value === 'string' && value.startsWith('/') && !value.startsWith('//')) {
+					(node as Element).properties[name] = new URL(value, site).href;
+				}
+			}
+		}
+		if ('children' in node) node.children.forEach(absolutizeLinks);
+	};
+	const toFeedHTML = unified()
+		.use(rehypeParse, { fragment: true })
+		.use(() => absolutizeLinks)
+		.use(rehypeStringify);
 
 	const items = await Promise.all(posts.map(async (post) => {
 		const { Content } = await render(post);
@@ -25,7 +41,7 @@ export const GET: APIRoute = async (context) => {
 		return {
 			title: post.data.title,
 			description: post.data.description,
-			content: absolutizeLinks(html),
+			content: String(await toFeedHTML.process(html)),
 			pubDate: post.data.pubDate,
 			link: `/blog/${post.id}/`,
 			categories: post.data.tags,
