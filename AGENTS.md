@@ -101,6 +101,8 @@ Required fields: `title` (string), `description` (string), and `pubDate` (date i
 
 Pushes to `master` automatically trigger `.github/workflows/deploy.yml`, which builds the Astro site and deploys `dist/` to Hostinger with rsync over SSH (key-based login, pinned host key). The required `SSH_HOST`, `SSH_PORT`, `SSH_USER`, `SSH_TARGET_DIR`, `SSH_PRIVATE_KEY`, and `SSH_KNOWN_HOSTS` secrets are already configured.
 
+CI (`.github/workflows/ci.yml`) and deploy both build on Node 24 LTS. `engines.node` in `package.json` (`>=22.23.4`) mirrors Astro 7's own minimum.
+
 Before deploying, let the user test changes locally:
 
 1. Make the requested changes.
@@ -129,3 +131,5 @@ When reviewing pull requests for this repository:
 - Skip minor formatting or stylistic nitpicks.
 - For dependency updates (e.g. Dependabot PRs), check for breaking changes or peer-dependency conflicts with Astro and `@astrojs/check`.
 - Keep feedback concise and explain web-specific issues briefly in practical terms.
+
+CodeRabbit auto-approval is intentionally enabled (`reviews.auto_approvals` in `.coderabbit.yaml`): CodeRabbit approves PRs that have no open findings. For agent-driven PRs, that approval is the merge gate, together with passing CI. `master` has no branch protection, so the owner can still merge or block any PR whatever CodeRabbit says.
