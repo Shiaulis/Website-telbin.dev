@@ -59,7 +59,7 @@ src/
     └── global.css                - All styles including dark mode support
 
 public/
-├── .htaccess                     - 404 page, www→apex redirect, security headers, 1-year /_astro/ caching
+├── .htaccess                     - 404 page, www→apex redirect, security headers (incl. CSP part 1), 1-year /_astro/ caching
 ├── robots.txt                    - Crawler directives
 ├── favicon.svg                   - Adaptive Waypoint favicon
 └── apple-touch-icon.png          - 180x180 PNG icon for iOS/iPadOS (SVG favicons are unsupported there)
@@ -122,6 +122,10 @@ Never push changes without the user's testing and approval first.
 - Full-text RSS feed at `/rss.xml` (published posts only), advertised via `<link rel="alternate">` and linked from the blog index.
 - JSON-LD structured data (Person/WebSite on home, ProfilePage on About, BlogPosting on posts) built in `BaseLayout.astro`.
 - Responsive mobile navigation and layouts.
+- Enforced Content-Security-Policy in two parts. `security.csp` in `astro.config.mjs` makes Astro add a `<meta>` CSP to every page with build-time sha256 hashes of its bundled inline scripts and styles, so editing those needs no manual hash updates. `public/.htaccess` sends `frame-ancestors`, `object-src`, `base-uri` and `form-action` as a header; never add `default-src`, `script-src` or `style-src` there, because it would block the hashed inline code.
+  - Loading anything from a new external host (image, font, script, `fetch`) needs that host added to the matching directive in `astro.config.mjs`.
+  - These are not hashed and will be blocked: `<script is:inline>`, inline `style="..."` attributes, inline event handlers (`onclick=`), and Shiki syntax highlighting (turned off via `markdown.syntaxHighlight: false`; use Prism plus a theme stylesheet if highlighting is wanted).
+  - CSP isn't applied by `npm run dev`; verify with `npm run build && npm run preview` and check the browser console for "Content Security Policy" errors.
 
 ## Review guidelines
 
