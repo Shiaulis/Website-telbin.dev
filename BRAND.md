@@ -23,6 +23,22 @@ Use the sage/lime accent (`#4D6B1A` light / `#CBD689` dark) for brand signatures
 | Foreground (`T`, wordmark, text) | `--text-color` | `#1A1C20` | `#EEEFF1` |
 | Brand & interactive accent (Waypoint dot, `.`, links) | `--brand-accent` / `--link-color` | `#4D6B1A` | `#CBD689` |
 
+### Website UI colors
+
+Supporting neutrals for the website, defined in `src/styles/global.css`. Use them only for UI chrome, never as brand signatures.
+
+| Role | CSS Token | Light mode | Dark mode |
+| --- | --- | --- | --- |
+| Muted text (dates, hero subline, card metadata) | `--muted-text-color` | `#5d616a` | `#9aa0a8` |
+| Surface (capability cards, eyebrows, secondary pills) | `--surface-color` | `#E4E6EA` | `#23262C` |
+| Border (cards, pills, avatar ring) | `--border-color` | `#D5D8DF` | `#2c2f36` |
+| Inverted card background ("How I help" card) | `--card-bg-color` | `#1A1C20` | `#23262C` |
+| Inverted card text | `--card-text-color` | `#EEEFF1` | `#EEEFF1` |
+
+Every text color must meet WCAG AA (at least 4.5:1 for normal text) against each background it is rendered on. Page text (`--text-color`, `--muted-text-color`, `--link-color`) must pass on both `--background-color` and `--surface-color`. Inverted card text (`--card-text-color`) must pass on `--card-bg-color`. Check the contrast before you lighten any text color.
+
+Social preview images (`src/pages/og/[...slug].png.ts`) use their own dark-only colors, tuned for feeds.
+
 ## Typography
 
 Use **Plus Jakarta Sans** across all brand touchpoints (wordmark, website, CV, and social banners):

@@ -1,7 +1,7 @@
 /* Default (light) mode */
 :root {
     --text-color: #1A1C20;
-    --muted-text-color: #6c7078;
+    --muted-text-color: #5d616a;
     --brand-accent: #4D6B1A;
     --link-color: var(--brand-accent);
     --background-color: #EEEFF1;
