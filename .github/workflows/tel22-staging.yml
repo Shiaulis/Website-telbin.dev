@@ -77,7 +77,8 @@ jobs:
           FAIL=0
           show() {
             echo "=== $1"
-            curl -sS -o /dev/null -D /tmp/h.txt "$1" || true
+            curl -sS -o /dev/null -D /tmp/raw.txt "$1" || true
+            tr -d '\r' < /tmp/raw.txt > /tmp/h.txt
             head -n 1 /tmp/h.txt
             grep -iE '^(cache-control|expires|etag|last-modified|content-type|content-security-policy|x-hcdn-cache-status):' /tmp/h.txt || true
             echo
@@ -85,8 +86,8 @@ jobs:
           status() { head -n 1 /tmp/h.txt | awk '{print $2}'; }
           expect() { [ "$(status)" = "$1" ] || { echo "FAIL: expected HTTP $1"; FAIL=1; }; }
           one_cc() { [ "$(grep -ci '^cache-control:' /tmp/h.txt)" = 1 ] || { echo "FAIL: expected exactly one Cache-Control"; FAIL=1; }; }
-          nocache() { one_cc; grep -qi '^cache-control: *no-cache *\r\?$' /tmp/h.txt || { echo "FAIL: expected Cache-Control: no-cache"; FAIL=1; }; }
-          immutable() { one_cc; grep -qi '^cache-control: *public, max-age=31536000, immutable *\r\?$' /tmp/h.txt || { echo "FAIL: expected 1-year immutable"; FAIL=1; }; }
+          nocache() { one_cc; grep -qi '^cache-control: *no-cache *$' /tmp/h.txt || { echo "FAIL: expected Cache-Control: no-cache"; FAIL=1; }; }
+          immutable() { one_cc; grep -qi '^cache-control: *public, max-age=31536000, immutable *$' /tmp/h.txt || { echo "FAIL: expected 1-year immutable"; FAIL=1; }; }
           csp() { grep -qi "^content-security-policy: frame-ancestors 'none'" /tmp/h.txt || { echo "FAIL: CSP header missing"; FAIL=1; }; }
 
           for p in "/" "/about/" "/blog/" "/blog/finally-finishing-my-website/" "/rss.xml" "/sitemap-index.xml" "/sitemap-0.xml"; do
