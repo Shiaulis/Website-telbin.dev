@@ -1,6 +1,7 @@
 ---
 import { Font, getImage } from 'astro:assets';
 import ogBanner from '../assets/og-banner.png';
+import authorPhoto from '../assets/author-photo.jpg';
 
 interface Props {
 	title?: string;
@@ -50,12 +51,27 @@ const ogImageHeight = image ? imageHeight : 630;
 
 // Structured data (JSON-LD) for search engines: who the site is about, and article details on blog posts.
 const homeURL = new URL('/', siteURL).href;
+const personImage = await getImage({ src: authorPhoto, width: 512, height: 512, format: 'jpg' });
 const person = {
 	'@type': 'Person',
 	'@id': `${homeURL}#person`,
 	name: 'Andrius Shiaulis',
 	url: homeURL,
 	jobTitle: 'Senior Software Engineer & AI Workflow Advisor',
+	description: 'Senior Software Engineer and Technical Advisor with 11+ years in tech (Pipedrive, Readdle), helping individuals and teams bring practical AI tools, custom agent workflows, and resilient architecture into daily work.',
+	image: new URL(personImage.src, siteURL).href,
+	knowsAbout: [
+		'Software engineering',
+		'Software architecture',
+		'iOS development',
+		'AI workflows',
+		'AI agents',
+		'Workflow automation',
+		'Obsidian',
+		'Technical leadership',
+		'Mentoring',
+	],
+	address: { '@type': 'PostalAddress', addressLocality: 'Tallinn', addressCountry: 'EE' },
 	sameAs: ['https://linkedin.com/in/shiaulis/', 'https://github.com/shiaulis', 'https://x.com/shiaulis'],
 };
 const pathname = Astro.url.pathname.replace(/\/?$/, '/');
