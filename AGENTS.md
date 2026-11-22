@@ -2,7 +2,7 @@
 
 ## Project overview
 
-Personal portfolio website for Andrius Shiaulis, a Senior Software Engineer & AI Workflow Advisor. Built with Astro 7.4.12 and deployed automatically via GitHub Actions to Hostinger FTP.
+Personal portfolio website for Andrius Shiaulis, a Senior Software Engineer & AI Workflow Advisor. Built with Astro 7.4.12 and deployed automatically via GitHub Actions to Hostinger over FTPS.
 
 ## Communication
 
@@ -96,7 +96,7 @@ Required fields: `title` (string), `description` (string), and `pubDate` (date i
 
 ## Deployment
 
-Pushes to `master` automatically trigger `.github/workflows/deploy.yml`, which builds the Astro site and deploys `dist/` to Hostinger via FTP. The required `FTP_HOST`, `FTP_USER`, `FTP_PASS`, and `FTP_TARGET_DIR` secrets are already configured.
+Pushes to `master` automatically trigger `.github/workflows/deploy.yml`, which builds the Astro site and deploys `dist/` to Hostinger via FTPS (FTP over TLS). The required `FTP_HOST`, `FTP_USER`, `FTP_PASS`, and `FTP_TARGET_DIR` secrets are already configured.
 
 Before deploying, let the user test changes locally:
 
