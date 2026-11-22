@@ -28,6 +28,7 @@ Component-based portfolio with a blog:
 src/
 ├── assets/
 │   ├── hero-sketch.jpg           - Hero portrait sketch
+│   ├── author-photo.jpg          - Author photo (blog byline avatar, Person JSON-LD image)
 │   └── og-banner.png             - Default 1200x630 Open Graph / Twitter preview banner
 ├── components/
 │   ├── Navigation.astro          - Top navigation bar with contact popover
