@@ -1,2 +1,24 @@
 # Serve the site's own 404 page for missing URLs (keeps the 404 status code)
 ErrorDocument 404 /404.html
+
+# Send www.telbin.dev to the canonical https://telbin.dev (same path and query string)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^www\.telbin\.dev$ [NC]
+  RewriteRule ^ https://telbin.dev%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  # HSTS: cautious 1-day start, no includeSubDomains, no preload.
+  # Raise max-age to 31536000 (1 year) once this has been live without problems.
+  Header always set Strict-Transport-Security "max-age=86400"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "DENY"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+
+  # Astro's /_astro/ files have content hashes in their names, so they never change: cache for a year.
+  <If "%{REQUEST_URI} =~ m#^/_astro/#">
+    Header always set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+</IfModule>
