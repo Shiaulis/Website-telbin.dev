@@ -16,6 +16,11 @@ ErrorDocument 404 /404.html
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set X-Frame-Options "DENY"
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+  # Content-Security-Policy, part 1 of 2. Astro adds part 2 (default-src, script/style hashes, img-src...)
+  # as a <meta> tag on every page; see security.csp in astro.config.mjs. Browsers enforce both.
+  # Never add default-src, script-src or style-src here: a header can't carry the per-build hashes,
+  # so it would block the site's inline scripts and styles.
+  Header always set Content-Security-Policy "frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'"
 
   # Astro's /_astro/ files have content hashes in their names, so they never change: cache for a year.
   <If "%{REQUEST_URI} =~ m#^/_astro/#">

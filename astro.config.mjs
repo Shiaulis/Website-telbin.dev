@@ -35,6 +35,27 @@ export default defineConfig({
 			fallbacks: ['ui-monospace', 'monospace'],
 		},
 	],
+	// Content-Security-Policy: Astro adds a <meta> CSP to every page with sha256 hashes of its own
+	// inline scripts and styles (computed at build time, so they never go stale). The directives
+	// that don't depend on hashes and must cover the whole response (frame-ancestors can't go in a
+	// <meta> tag at all) are sent as a second policy header from public/.htaccess.
+	security: {
+		csp: {
+			directives: [
+				"default-src 'self'",
+				// /ipad-cases hotlinks product photos from these two stores.
+				"img-src 'self' https://galador.b-cdn.net https://www.euronics.ee",
+				"font-src 'self'",
+				"connect-src 'self'",
+				'upgrade-insecure-requests',
+			],
+		},
+	},
+	// Shiki colours code blocks with inline style="" attributes, which the CSP above blocks.
+	// Code blocks are styled by .post-content pre in global.css instead.
+	markdown: {
+		syntaxHighlight: false,
+	},
 	integrations: [
 		sitemap({
 			filter: (page) => !/^\/(404|ipad-cases)\/?$/.test(new URL(page).pathname),
