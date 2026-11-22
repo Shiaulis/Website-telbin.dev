@@ -27,5 +27,8 @@ Use the sage/lime accent (`#4D6B1A` light / `#CBD689` dark) for brand signatures
 
 Use **Plus Jakarta Sans** across all brand touchpoints (wordmark, website, CV, and social banners):
 
-- **Font stack:** `"Plus Jakarta Sans", system-ui, -apple-system, Helvetica, Arial, sans-serif`
+- **Font stack:** `"Plus Jakarta Sans", system-ui, sans-serif`
+- **Blog post text:** **Source Serif 4** (`400`–`700`, with italics) for running text inside posts only, for comfortable long-form reading. Headings stay in Plus Jakarta Sans.
+- **Monospace:** **Fira Code** for eyebrows, labels and code (ligatures turned off in code).
+- **Hosting:** All fonts are self-hosted through Astro's Fonts API (`fonts` in `astro.config.mjs`); never load them from Google Fonts.
 - **Weights:** `700` (Bold) for the `telbin.dev` wordmark and headings; `400`–`600` for body copy and UI labels.

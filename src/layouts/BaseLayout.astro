@@ -1,5 +1,5 @@
 ---
-import { getImage } from 'astro:assets';
+import { Font, getImage } from 'astro:assets';
 import ogBanner from '../assets/og-banner.png';
 
 interface Props {
@@ -139,11 +139,10 @@ const structuredDataJSON = structuredData && JSON.stringify(structuredData).repl
 
 	{structuredDataJSON && <script type="application/ld+json" set:html={structuredDataJSON} />}
 
-	<!-- Fonts & Icons -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous">
+	<!-- Fonts (self-hosted; only the main UI font is preloaded) -->
+	<Font cssVariable="--font-jakarta" preload={[{ subset: 'latin', style: 'normal' }]} />
+	<Font cssVariable="--font-source-serif" />
+	<Font cssVariable="--font-fira-code" />
 </head>
 <body>
 	<slot />

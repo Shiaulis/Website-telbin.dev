@@ -32,6 +32,7 @@ src/
 ├── components/
 │   ├── Navigation.astro          - Top navigation bar with contact popover
 │   ├── Footer.astro              - Footer with copyright year
+│   ├── Icon.astro                - Inline SVG icons (arrow-left, external-link, info)
 │   ├── HeroSection.astro         - Hero section with bio and sketch portrait
 │   ├── HowIHelpSection.astro     - Services and advisory capabilities section
 │   └── ExperienceSection.astro   - Experience timeline (uses data/experience.ts)
