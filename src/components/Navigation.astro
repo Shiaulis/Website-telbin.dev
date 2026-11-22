@@ -163,7 +163,19 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
 		popover.style.left = `${left}px`;
 	}
 
-	if (trigger && popover) {
+	const contactMailto = 'mailto:andrius@telbin.dev';
+
+	if (trigger && popover && typeof popover.showPopover !== 'function') {
+		// No Popover API: the panel stays hidden (see global.css), so go straight to email.
+		trigger.removeAttribute('aria-expanded');
+		trigger.removeAttribute('aria-controls');
+		trigger.addEventListener('click', () => {
+			window.location.href = contactMailto;
+		});
+		document.querySelectorAll<HTMLAnchorElement>('a[href="#contact"]').forEach((link) => {
+			link.href = contactMailto;
+		});
+	} else if (trigger && popover) {
 		popover.addEventListener('toggle', (event) => {
 			const isOpen = (event as ToggleEvent).newState === 'open';
 			trigger.setAttribute('aria-expanded', String(isOpen));
@@ -179,10 +191,6 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
 		});
 
 		document.querySelectorAll<HTMLAnchorElement>('a[href="#contact"]').forEach((link) => {
-			if (typeof popover.showPopover !== 'function') {
-				link.href = 'mailto:andrius@telbin.dev';
-				return;
-			}
 			link.addEventListener('click', (event) => {
 				event.preventDefault();
 				window.scrollTo({ top: 0, behavior: 'smooth' });
