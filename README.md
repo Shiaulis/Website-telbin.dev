@@ -17,7 +17,7 @@
     <a href="https://telbin.dev"><strong>telbin.dev</strong></a> ·
     <a href="BRAND.md">Brand Guide</a> ·
     <a href="https://github.com/Shiaulis/Website-telbin.dev/actions/workflows/deploy.yml">
-      <img src="https://github.com/Shiaulis/Website-telbin.dev/actions/workflows/deploy.yml/badge.svg" alt="Deploy to Hostinger FTP">
+      <img src="https://github.com/Shiaulis/Website-telbin.dev/actions/workflows/deploy.yml/badge.svg" alt="Deploy to Hostinger via rsync over SSH">
     </a>
   </p>
 </div>
@@ -40,7 +40,7 @@ Built with [Astro](https://astro.build/) as a fast, zero-JavaScript-framework st
 - **Language:** TypeScript (`astro check`)
 - **Styling:** Vanilla CSS with custom properties and `prefers-color-scheme` dark mode (`src/styles/global.css`)
 - **Content:** Astro Content Collections (Markdown + Zod schema validation)
-- **CI/CD:** GitHub Actions → Hostinger FTP
+- **CI/CD:** GitHub Actions → Hostinger (rsync over SSH)
 
 ## Project Structure
 
@@ -93,7 +93,7 @@ Post content here...
 
 ## Deployment
 
-Pushes to `master` automatically trigger [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), which runs `npm ci`, verifies types with `npm run check`, builds `./dist/`, and syncs the output to Hostinger via FTP.
+Pushes to `master` automatically trigger [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), which runs `npm ci`, verifies types with `npm run check`, builds `./dist/`, and syncs the output to Hostinger with rsync over SSH.
 
 ## License
 
