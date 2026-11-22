@@ -35,7 +35,7 @@ Supporting neutrals for the website, defined in `src/styles/global.css`. Use the
 | Inverted card background ("How I help" card) | `--card-bg-color` | `#1A1C20` | `#23262C` |
 | Inverted card text | `--card-text-color` | `#EEEFF1` | `#EEEFF1` |
 
-All text colors must meet WCAG AA (at least 4.5:1 for normal text) on both `--background-color` and `--surface-color`. Check the contrast before you lighten muted text.
+Every text color must meet WCAG AA (at least 4.5:1 for normal text) against each background it is rendered on. Page text (`--text-color`, `--muted-text-color`, `--link-color`) must pass on both `--background-color` and `--surface-color`. Inverted card text (`--card-text-color`) must pass on `--card-bg-color`. Check the contrast before you lighten any text color.
 
 Social preview images (`src/pages/og/[...slug].png.ts`) use their own dark-only colors, tuned for feeds.
 
