@@ -37,7 +37,7 @@ export default defineConfig({
 	],
 	integrations: [
 		sitemap({
-			filter: (page) => !/^\/(thanks|404|ipad-cases)\/?$/.test(new URL(page).pathname),
+			filter: (page) => !/^\/(404|ipad-cases)\/?$/.test(new URL(page).pathname),
 		}),
 	],
 });

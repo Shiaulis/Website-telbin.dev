@@ -48,7 +48,7 @@ src/
 │   ├── index.astro               - Main page (Hero + How I Help)
 │   ├── about.astro               - About page (bio, competencies, experience timeline)
 │   ├── 404.astro                 - Custom 404 error page
-│   ├── thanks.astro              - Contact form confirmation page
+│   ├── ipad-cases.astro          - Unlisted iPad case comparison page (noindex, excluded from sitemap)
 │   ├── rss.xml.ts                - RSS feed with full text of published (non-draft) blog posts at /rss.xml
 │   ├── og/
 │   │   └── [...slug].png.ts      - Build-time 1200x630 social preview image per blog post (satori + sharp)
@@ -63,6 +63,9 @@ public/
 ├── robots.txt                    - Crawler directives
 ├── favicon.svg                   - Adaptive Waypoint favicon
 └── apple-touch-icon.png          - 180x180 PNG icon for iOS/iPadOS (SVG favicons are unsupported there)
+
+brand/                            - Waypoint logo SVGs, usage sheet, and LinkedIn banner
+BRAND.md                          - Brand guidelines, palette tokens, and logo usage
 ```
 
 To add a section, create a component in `src/components/` and import it in `src/pages/index.astro`.
@@ -116,7 +119,6 @@ Never push changes without the user's testing and approval first.
 - Open Graph and Twitter Card metadata, including publish dates, image alt text, and per-post generated preview images (`/og/<slug>.png`; a post's `image` frontmatter overrides it).
 - Full-text RSS feed at `/rss.xml` (published posts only), advertised via `<link rel="alternate">` and linked from the blog index.
 - JSON-LD structured data (Person/WebSite on home, ProfilePage on About, BlogPosting on posts) built in `BaseLayout.astro`.
-- Contact form integrated with FormSubmit.co.
 - Responsive mobile navigation and layouts.
 
 ## Review guidelines
