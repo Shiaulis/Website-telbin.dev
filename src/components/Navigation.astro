@@ -179,6 +179,10 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
 		});
 
 		document.querySelectorAll<HTMLAnchorElement>('a[href="#contact"]').forEach((link) => {
+			if (typeof popover.showPopover !== 'function') {
+				link.href = 'mailto:andrius@telbin.dev';
+				return;
+			}
 			link.addEventListener('click', (event) => {
 				event.preventDefault();
 				window.scrollTo({ top: 0, behavior: 'smooth' });
