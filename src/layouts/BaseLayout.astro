@@ -56,7 +56,7 @@ const person = {
 	name: 'Andrius Shiaulis',
 	url: homeURL,
 	jobTitle: 'Senior Software Engineer & AI Workflow Advisor',
-	sameAs: ['https://linkedin.com/in/shiaulis/', 'https://github.com/shiaulis'],
+	sameAs: ['https://linkedin.com/in/shiaulis/', 'https://github.com/shiaulis', 'https://x.com/shiaulis'],
 };
 const pathname = Astro.url.pathname.replace(/\/?$/, '/');
 let structuredData: Record<string, unknown> | undefined;
@@ -126,6 +126,8 @@ const structuredDataJSON = structuredData && JSON.stringify(structuredData).repl
 
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@shiaulis">
+	<meta name="twitter:creator" content="@shiaulis">
 	<meta name="twitter:title" content={ogTitle}>
 	<meta name="twitter:description" content={description}>
 	<meta name="twitter:image" content={imageURL}>

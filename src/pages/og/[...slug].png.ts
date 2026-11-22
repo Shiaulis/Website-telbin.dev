@@ -28,7 +28,7 @@ const colors = {
 	background: '#1D1F23',
 	glow: '#2A2E24',
 	text: '#EEEFF1',
-	muted: '#9A9EA6',
+	muted: '#B4B8BF',
 	accent: '#CBD689',
 	tile: '#25282C',
 	tileBorder: '#3A3D42',
@@ -48,7 +48,7 @@ export const GET: APIRoute = async ({ props }) => {
 	const post = props as CollectionEntry<'blog'>;
 	const title = post.data.title;
 	const titleSize = title.length > 70 ? 54 : title.length > 45 ? 62 : 72;
-	const date = post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+	const date = post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
 
 	const tree = h(
 		'div',
@@ -81,12 +81,16 @@ export const GET: APIRoute = async ({ props }) => {
 					},
 					h('img', { width: 56, height: 56 }, undefined, { src: logo, width: 56, height: 56 }),
 				),
-				h('div', { display: 'flex', fontFamily: 'Fira Code', fontSize: 28, color: colors.muted }, 'telbin.dev'),
+				h('div', { display: 'flex', fontFamily: 'Fira Code', fontSize: 36, color: colors.muted }, 'telbin.dev'),
 			]),
 			h('div', { display: 'flex', fontSize: titleSize, fontWeight: 700, lineHeight: 1.15, letterSpacing: '-0.02em' }, title),
-			h('div', { display: 'flex', flexDirection: 'column', gap: 8 }, [
-				h('div', { display: 'flex', fontSize: 32, fontWeight: 700, color: colors.accent }, 'Andrius Shiaulis'),
-				h('div', { display: 'flex', fontSize: 26, fontWeight: 500, color: colors.muted }, `Senior Software Engineer & AI Workflow Advisor · ${date}`),
+			// Small text is sized to stay readable when platforms shrink the card to ~400px wide in feeds.
+			h('div', { display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }, [
+				h('div', { display: 'flex', flexDirection: 'column', gap: 6 }, [
+					h('div', { display: 'flex', fontSize: 42, fontWeight: 700, color: colors.accent }, 'Andrius Shiaulis'),
+					h('div', { display: 'flex', fontSize: 32, fontWeight: 500, color: colors.muted }, 'Senior Software Engineer & AI Workflow Advisor'),
+				]),
+				h('div', { display: 'flex', fontSize: 32, fontWeight: 500, color: colors.muted }, date),
 			]),
 		],
 	);
