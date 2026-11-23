@@ -43,8 +43,6 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
 					<button
 						type="button"
 						class="contact-item contact-copy-item"
-						command="--copy"
-						commandfor="contact-email-value"
 					>
 						<span class="contact-item-text">
 							<span class="contact-item-label">Email</span>
@@ -163,17 +161,7 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
 		popover.style.left = `${left}px`;
 	}
 
-	const contactMailto = 'mailto:andrius@telbin.dev';
-
-	if (trigger && popover && typeof popover.showPopover !== 'function') {
-		// No Popover API: the panel stays hidden (see global.css), so go straight to email.
-		trigger.removeAttribute('aria-expanded');
-		trigger.removeAttribute('aria-controls');
-		trigger.addEventListener('click', () => {
-			window.location.href = contactMailto;
-		});
-		// [data-contact-link] anchors already have a mailto: href, so they need no handling here.
-	} else if (trigger && popover) {
+	if (trigger && popover) {
 		// The in-page link ("Get in touch") that opened the popover, so focus can go back to it on close.
 		let openerLink: HTMLAnchorElement | null = null;
 		let restoreFocus = false;
@@ -210,7 +198,7 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
 				const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 				window.scrollTo({ top: 0, behavior: reduceMotion ? 'instant' : 'smooth' });
 				if (!popover.matches(':popover-open')) {
-					popover.showPopover?.({ source: trigger } as ShowPopoverOptions);
+					popover.showPopover({ source: trigger } as ShowPopoverOptions);
 				}
 				// Move focus into the menu so keyboard and VoiceOver users land on its first item.
 				// preventScroll keeps the scroll-to-top above from being cut short.
@@ -222,19 +210,6 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
 
 	const timers = new WeakMap<HTMLElement, number>();
 	let lastMessage = '';
-
-	function legacyCopy(text: string): boolean {
-		const field = Object.assign(document.createElement('textarea'), { value: text });
-		field.setAttribute('readonly', '');
-		field.style.cssText = 'position:fixed;inset-block-start:0;opacity:0';
-		document.body.append(field);
-		field.select();
-		try {
-			return document.execCommand('copy');
-		} finally {
-			field.remove();
-		}
-	}
 
 	function report(button: HTMLElement, ok: boolean) {
 		const tip = button.nextElementSibling as HTMLElement | null;
@@ -260,40 +235,17 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
 		);
 	}
 
-	async function copy(button: HTMLElement, target: HTMLElement) {
-		const text = target.innerText.trim();
+	const copyButton = document.querySelector<HTMLButtonElement>('.contact-copy-item');
+	const email = document.getElementById('contact-email-value');
+
+	copyButton?.addEventListener('click', async () => {
+		const text = email?.textContent?.trim();
 		if (!text) return;
 		try {
 			await navigator.clipboard.writeText(text);
-			report(button, true);
+			report(copyButton, true);
 		} catch {
-			if (legacyCopy(text)) {
-				report(button, true);
-			} else {
-				report(button, false);
-			}
+			report(copyButton, false);
 		}
-	}
-
-	document.addEventListener(
-		'command',
-		(event: Event) => {
-			const cmdEvent = event as Event & { command?: string; source?: HTMLElement };
-			if (cmdEvent.command?.startsWith('--copy') && cmdEvent.source && cmdEvent.target instanceof HTMLElement) {
-				copy(cmdEvent.source, cmdEvent.target);
-			}
-		},
-		true
-	);
-
-	if (!('CommandEvent' in window)) {
-		document.addEventListener('click', (event) => {
-			const targetEl = event.target as Element | null;
-			const button = targetEl?.closest<HTMLButtonElement>('button[command^="--copy"]');
-			if (!button) return;
-			const copyTargetId = button.getAttribute('commandfor');
-			const copyTarget = copyTargetId ? document.getElementById(copyTargetId) : null;
-			if (copyTarget) copy(button, copyTarget);
-		});
-	}
+	});
 </script>

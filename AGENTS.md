@@ -99,6 +99,8 @@ Post content here...
 
 Required fields: `title` (string), `description` (string), and `pubDate` (date in `YYYY-MM-DD` format). Optional fields: `updatedDate` (date), `draft` (boolean), `tags` (array of strings), and `image` (string path or URL; overrides the generated Open Graph image).
 
+Put post images in `public/` and reference them by absolute path (`![](/images/pic.png)`). The RSS feed uses the stored post HTML, which can't resolve images placed next to the post (`![](./pic.png)`).
+
 ## Deployment
 
 Pushes to `master` automatically trigger `.github/workflows/deploy.yml`, which builds the Astro site and deploys `dist/` to Hostinger with rsync over SSH (key-based login, pinned host key). The required `SSH_HOST`, `SSH_PORT`, `SSH_USER`, `SSH_TARGET_DIR`, `SSH_PRIVATE_KEY`, and `SSH_KNOWN_HOSTS` secrets are already configured.

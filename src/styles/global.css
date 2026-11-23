@@ -188,13 +188,6 @@ nav .nav-right {
     }
 }
 
-/* No Popover API: never show the panel (the Contact button falls back to mailto: in Navigation.astro). */
-@supports not selector(:popover-open) {
-    .contact-popover {
-        display: none;
-    }
-}
-
 .contact-popover:not(:popover-open) {
     display: none;
 }

@@ -8,7 +8,7 @@ const DEFAULT_DESCRIPTION = 'Senior Software Engineer and Technical Advisor, 11+
 interface Props {
 	title?: string;
 	description?: string;
-	/** Shorter title for link previews (og:title / twitter:title). Defaults to `title`. */
+	/** Shorter title for link previews (og:title). Defaults to `title`. */
 	socialTitle?: string;
 	image?: string;
 	imageAlt?: string;
@@ -142,14 +142,10 @@ const structuredDataJSON = structuredData && JSON.stringify(structuredData).repl
 	{modifiedTime && <meta property="article:modified_time" content={modifiedTime.toISOString()}>}
 	{type === 'article' && <meta property="article:author" content={new URL('/about/', siteURL).href}>}
 
-	<!-- Twitter Card -->
+	<!-- Twitter Card: X reads title, description and image from the og: tags above -->
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:site" content="@shiaulis">
 	<meta name="twitter:creator" content="@shiaulis">
-	<meta name="twitter:title" content={ogTitle}>
-	<meta name="twitter:description" content={description}>
-	<meta name="twitter:image" content={imageURL}>
-	<meta name="twitter:image:alt" content={imageAlt}>
 
 	<!-- Favicon -->
 	<link rel="icon" type="image/svg+xml" href="/favicon.svg">
