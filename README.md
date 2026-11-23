@@ -46,25 +46,13 @@ Built with [Astro](https://astro.build/) as a fast, zero-JavaScript-framework st
 
 ## Project Structure
 
-```text
-├── brand/                        # Waypoint logo SVGs, usage sheet, and LinkedIn banner
-├── public/
-│   ├── .htaccess                 # 404 page, www→apex redirect, security headers (incl. CSP part 1), 1-year /_astro/ caching
-│   ├── apple-touch-icon.png      # 180x180 icon for iOS/iPadOS home screens
-│   ├── favicon.svg               # Adaptive Waypoint favicon
-│   └── robots.txt                # Crawler directives & sitemap pointer
-├── src/
-│   ├── assets/                   # Build-optimized images (hero sketch, author photo, Open Graph banner)
-│   ├── components/               # UI sections (Navigation, Hero, HowIHelp, Experience, Footer) and Icon
-│   ├── content/blog/             # Markdown blog posts
-│   ├── content.config.ts         # Content Collections schema
-│   ├── data/experience.ts        # Work history timeline & core competencies data
-│   ├── layouts/BaseLayout.astro  # Shared HTML head, SEO, and Open Graph metadata
-│   ├── pages/                    # File-based routes (/, /about, /blog, /rss.xml, /og/<slug>.png, /404, unlisted /ipad-cases)
-│   └── styles/global.css         # Design tokens, typography, and component styles
-├── AGENTS.md                     # Instructions and context for AI coding agents
-└── BRAND.md                      # Brand guidelines, palette tokens, and logo usage
-```
+- `src/pages/` — file-based routes (home, about, blog, RSS feed, social preview images, 404)
+- `src/components/` and `src/layouts/` — UI sections and the shared HTML head (SEO, Open Graph, JSON-LD)
+- `src/content/blog/` — Markdown blog posts
+- `public/` — files served as-is (`.htaccess`, favicons, `robots.txt`)
+- `brand/` — Waypoint logo SVGs and banners (see [`BRAND.md`](BRAND.md))
+
+See [`AGENTS.md`](AGENTS.md) for the full project map.
 
 ## Development
 
