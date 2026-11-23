@@ -6,6 +6,10 @@ ErrorDocument 404 /404.html
   RewriteEngine On
   RewriteCond %{HTTP_HOST} ^www\.telbin\.dev$ [NC]
   RewriteRule ^ https://telbin.dev%{REQUEST_URI} [R=301,L]
+
+  # Short, shareable booking link: telbin.dev/call opens the Fantastical "intro-call" page.
+  # 302 (temporary) so browsers don't cache it and the target can change later.
+  RewriteRule ^call/?$ https://fantastical.app/shiaulis/intro-call [R=302,L]
 </IfModule>
 
 <IfModule mod_headers.c>

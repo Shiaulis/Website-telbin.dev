@@ -59,7 +59,7 @@ src/
     └── global.css                - All styles including dark mode support
 
 public/
-├── .htaccess                     - 404 page, www→apex redirect, security headers (incl. CSP part 1), 1-year /_astro/ caching, no-cache for HTML/XML
+├── .htaccess                     - 404 page, www→apex redirect, /call → Fantastical booking redirect, security headers (incl. CSP part 1), 1-year /_astro/ caching, no-cache for HTML/XML
 ├── robots.txt                    - Crawler directives
 ├── favicon.svg                   - Adaptive Waypoint favicon
 └── apple-touch-icon.png          - 180x180 PNG icon for iOS/iPadOS (SVG favicons are unsupported there)
