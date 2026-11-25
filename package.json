@@ -18,7 +18,7 @@
     "@astrojs/sitemap": "^3.7.5",
     "@fontsource/fira-code": "^5.3.0",
     "@fontsource/plus-jakarta-sans": "^5.3.0",
-    "astro": "^7.4.12",
+    "astro": "^7.4.13",
     "rehype-parse": "^9.0.1",
     "rehype-stringify": "^10.0.1",
     "satori": "^0.63.2",
